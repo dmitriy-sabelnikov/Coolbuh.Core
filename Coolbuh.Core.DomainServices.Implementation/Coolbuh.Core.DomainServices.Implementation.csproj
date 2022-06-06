@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AdditionalPaymentsService.cs~RF418c07.TMP" />
+    <None Remove="ListSocialBenefitsService.cs~RF9f6992.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coolbuh.Core.DomainServices.Interfaces\Coolbuh.Core.DomainServices.Interfaces.csproj" />
+    <ProjectReference Include="..\Coolbuh.Core.Entities\Coolbuh.Core.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+{
+  "Coolbuh.WebApi": {
+    "commandName": "Project",
+    "applicationUrl": "https://localhost:7001;http://localhost:7000",
+    "environmentVariables": {
+      "DOTNET_ENVIRONMENT": "Development"
+    }
+  },
+  "profiles": {
+    "WebApi": {
+      "commandName": "Project",
+      "launchUrl": "https://localhost:7001/api",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:7001;http://localhost:7000"
+    }
+  }
+}

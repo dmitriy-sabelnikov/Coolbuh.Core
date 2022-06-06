@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Handlers\AdditionalAccruals\Queries\GetAdditionalAccrualsByParams\GetAdditionalAccrualsByParamsRequest.cs~RF9bf1c0.TMP" />
+    <None Remove="Handlers\ListMinimumSalaries\Commands\UpdateListMinimumSalary\UpdateListMinimumSalaryRequestHandler.cs~RFe9bb53c.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coolbuh.Core.DomainServices.Interfaces\Coolbuh.Core.DomainServices.Interfaces.csproj" />
+    <ProjectReference Include="..\Coolbuh.Core.Entities\Coolbuh.Core.Entities.csproj" />
+    <ProjectReference Include="..\Coolbuh.Core.Infrastructure.Interfaces\Coolbuh.Core.Infrastructure.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

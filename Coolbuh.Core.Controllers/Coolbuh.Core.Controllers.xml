@@ -1,0 +1,737 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Coolbuh.Core.Controllers</name>
+    </assembly>
+    <members>
+        <member name="T:Coolbuh.Core.Controllers.AccountingPeriodsController">
+            <summary>
+            Отчетные периоды
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AccountingPeriodsController.Get(System.Boolean)">
+            <summary>
+            Получить список отчетных периодов
+            </summary>
+            <param name="AddItemAllYear">Добавлять в список Год</param>
+            <response code="200">Список отчетных периодов</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.AdditionalAccrualsController">
+            <summary>
+            Дополнительные начисления
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalAccrualsController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список дополнительных начислений
+            </summary>
+            <param name="startPeriod">Начало отчетного периода</param>
+            <param name="endPeriod">Окончание отчетного периода</param>
+            <param name="departmentId">Идентификатор подразделения</param>
+            <response code="200">Список дополнительных начислений</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalAccrualsController.Post(Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Dto.CreateAdditionalAccrualDto)">
+            <summary>
+            Создать дополнительное начисление
+            </summary>
+            <param name="additionalAccrual">Параметры для создания дополнительного начисления</param>
+            <response code="200">Созданное дополнительное начисление</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalAccrualsController.Put(Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Dto.UpdateAdditionalAccrualDto)">
+            <summary>
+            Обновить дополнительное начисление
+            </summary>
+            <param name="additionalAccrual">Параметры для обновления дополнительного начисления</param>
+            <response code="200">Обновленное дополнительное начисление</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalAccrualsController.Delete(Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Dto.DeleteAdditionalAccrualDto)">
+            <summary>
+            Удалить дополнительное начисление
+            </summary>
+            <param name="additionalAccrual">Параметры для удаления дополнительного начисления</param>
+            <response code="200">Удаленное дополнительное начисление</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.AdditionalPaymentsController">
+            <summary>
+            Дополнительные выплаты
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalPaymentsController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список дополнительных выплат
+            </summary>
+            <param name="startPeriod">Начало отчетного периода</param>
+            <param name="endPeriod">Окончание отчетного периода</param>
+            <param name="additionalPaymentTypeId">Идентификатор типа дополнительной выплаты</param>
+            <response code="200">Список дополнительных выплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalPaymentsController.Post(Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Dto.CreateAdditionalPaymentDto)">
+            <summary>
+            Создать дополнительную выплату
+            </summary>
+            <param name="additionalPayment">Параметры для создания дополнительной выплаты</param>
+            <response code="200">Созданная дополнительная выплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalPaymentsController.Put(Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Dto.UpdateAdditionalPaymentDto)">
+            <summary>
+            Обновить дополнительную выплату
+            </summary>
+            <param name="additionalPayment">Параметры для обновления дополнительной выплаты</param>
+            <response code="200">Обновленная дополнительная выплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.AdditionalPaymentsController.Delete(Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Dto.DeleteAdditionalPaymentDto)">
+            <summary>
+            Удалить дополнительную выплату
+            </summary>
+            <param name="additionalPayment">Параметры для удаления дополнительной выплаты</param>
+            <response code="200">Удаленная дополнительная выплата</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ApplicationSettingsController">
+            <summary>
+            Параметры приложения
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ApplicationSettingsController.Get">
+            <summary>
+            Получить параметры приложения
+            </summary>
+            <response code="200">Параметры приложения</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ApplicationSettingsController.Post(Coolbuh.Core.UseCases.Handlers.ApplicationSettings.Dto.ChangeApplicationSettingDto)">
+            <summary>
+            Изменить параметры приложения
+            </summary>
+            <param name="applicationSetting">Параметры приложения для изменения</param>
+            <returns>Измененные параметры приложения</returns>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.CivilLawContractsController">
+            <summary>
+            Договора ГПХ
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.CivilLawContractsController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список договоров ГПХ
+            </summary>
+            <param name="startPeriod">Начало отчетного периода</param>
+            <param name="endPeriod">Окончание отчетного периода</param>
+            <param name="departmentId">Идентификатор подразделения</param>
+            <response code="200">Список договоров ГПХ</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.CivilLawContractsController.Post(Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Dto.CreateCivilLawContractDto)">
+            <summary>
+            Создать договор ГПХ
+            </summary>
+            <param name="civilLawContract">Параметры для создания договора ГПХ</param>
+            <response code="200">Созданный договор ГПХ</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.CivilLawContractsController.Put(Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Dto.UpdateCivilLawContractDto)">
+            <summary>
+            Обновить договор ГПХ
+            </summary>
+            <param name="civilLawContract">Параметры для обновления договора ГПХ</param>
+            <response code="200">Обновленный договор ГПХ</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.CivilLawContractsController.Delete(Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Dto.DeleteCivilLawContractDto)">
+            <summary>
+            Удалить договор ГПХ
+            </summary>
+            <param name="civilLawContract">Параметры для удаления договора ГПХ</param>
+            <response code="200">Удаленный договор ГПХ</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ConsolidateReportsController">
+            <summary>
+            Объединенная ведомость
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ConsolidateReportsController.Get">
+            <summary>
+            Получить список объединенных ведомостей
+            </summary>
+            <response code="200">Список объединенных ведомостей</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ConsolidateReportsController.Get(System.Int32)">
+            <summary>
+            Получить приложения объединенной ведомости
+            </summary>
+            <param name="consolidateReportCatalogId">Идентификатор каталога объединенной ведомости</param>
+            <response code="200">Приложения объединенной ведомости</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ConsolidateReportsController.Post(Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Dto.CreateConsolidateReportCatalogDto)">
+            <summary>
+            Создать объединенную ведомость
+            </summary>
+            <param name="consolidateReportCatalog">Параметры для объединенной ведомости</param>
+            <response code="200">Созданная объединенная ведомость</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ConsolidateReportsController.Put(Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Dto.UpdateConsolidateReportCatalogDto)">
+            <summary>
+            Обновить объединенную ведомость
+            </summary>
+            <param name="consolidateReportCatalog">Параметры для обновления объединенной ведомости</param>
+            <response code="200">Обновленная объединенная ведомость</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ConsolidateReportsController.Delete(Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Dto.DeleteConsolidateReportCatalogDto)">
+            <summary>
+            Удалить объединенную ведомость
+            </summary>
+            <param name="consolidateReportCatalog">Параметры для удаления объединенной ведомости</param>
+            <response code="200">Удаленная объединенная ведомость</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.EmployeeCardsController">
+            <summary>
+            Карточки работника
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Get">
+            <summary>
+            Получить список карточек работника
+            </summary>
+            <response code="200">Список карточек работника</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Get(System.Int32)">
+            <summary>
+            Получить карточку работника
+            </summary>
+            <param name="id">Идентификатор работника</param>
+            <response code="200">Карточка работника</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Post(Coolbuh.Core.UseCases.Handlers.EmployeeCards.Dto.EmployeeCard.CreateEmployeeCardDto)">
+            <summary>
+            Создать карточку работника
+            </summary>
+            <param name="employeeCard">Параметры для создания карточки работника</param>
+            <response code="200">Созданная карточка работника</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Post(Coolbuh.Core.UseCases.Handlers.EmployeeCards.Dto.EmployeeCard.CalculateEmployeeCardDto)">
+            <summary>
+            Рассчитать карточку работника
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Put(Coolbuh.Core.UseCases.Handlers.EmployeeCards.Dto.EmployeeCard.UpdateEmployeeCardDto)">
+            <summary>
+            Обновить карточку работника
+            </summary>
+            <param name="employeeCard">Параметры для обновления карточки работника</param>
+            <response code="200">Обновленная карточка работника</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.EmployeeCardsController.Delete(Coolbuh.Core.UseCases.Handlers.EmployeeCards.Dto.EmployeeCard.DeleteEmployeeCardDto)">
+            <summary>
+            Удалить карточку работника
+            </summary>
+            <param name="employeeCard">Параметры для удаления карточки работника</param>
+            <response code="200">Удаленная карточка работника</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListAdditionalAccrualTypesController">
+            <summary>
+            Справочник "Типы дополнительных начислений"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalAccrualTypesController.Get">
+            <summary>
+            Получить список типов дополнительных начислений
+            </summary>
+            <response code="200">Список типов дополнительных начислений</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalAccrualTypesController.Post(Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Dto.CreateListAdditionalAccrualTypeDto)">
+            <summary>
+            Создать тип дополнительного начисления
+            </summary>
+            <param name="additionalAccrualType">Параметры для создания типа дополнительного начисления</param>
+            <response code="200">Тип дополнительных начислений</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalAccrualTypesController.Put(Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Dto.UpdateListAdditionalAccrualTypeDto)">
+            <summary>
+            Обновить тип дополнительного начисления
+            </summary>
+            <param name="additionalAccrualType">Параметры для обновления типа дополнительного начисления</param>
+            <response code="200">Тип дополнительных начислений</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalAccrualTypesController.Delete(Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Dto.DeleteListAdditionalAccrualTypeDto)">
+            <summary>
+            Удалить тип дополнительного начисления
+            </summary>
+            <param name="additionalAccrualType">Параметры для удаления типа дополнительного начисления</param>
+            <response code="200">Тип дополнительных начислений</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListAdditionalPaymentTypesController">
+            <summary>
+            Справочник "Типы дополнительных выплат"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalPaymentTypesController.Get">
+            <summary>
+            Получить список типов дополнительных выплат
+            </summary>
+            <response code="200">Список типов дополнительных выплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalPaymentTypesController.Post(Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Dto.CreateListAdditionalPaymentTypeDto)">
+            <summary>
+            Создать тип дополнительной выплаты
+            </summary>
+            <param name="additionalPaymentType">Параметры для создания типа дополнительной выплаты</param>
+            <response code="200">Созданный тип дополнительной выплаты</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalPaymentTypesController.Put(Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Dto.UpdateListAdditionalPaymentTypeDto)">
+            <summary>
+            Обновить тип дополнительной выплаты
+            </summary>
+            <param name="additionalPaymentType">Параметры для обновления типа дополнительной выплаты</param>
+            <response code="200">Обновленный тип дополнительной выплаты</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdditionalPaymentTypesController.Delete(Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Dto.DeleteListAdditionalPaymentTypeDto)">
+            <summary>
+            Удалить тип дополнительной выплаты
+            </summary>
+            <param name="additionalPaymentType">Параметры для удаления типа дополнительной выплаты</param>
+            <response code="200">Удаленный тип дополнительной выплаты</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListAdministrationsController">
+            <summary>
+            Справочник "Администрации"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdministrationsController.Get">
+            <summary>
+            Получить список администраций
+            </summary>
+            <response code="200">Список администраций</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdministrationsController.Post(Coolbuh.Core.UseCases.Handlers.ListAdministrations.Dto.CreateListAdministrationDto)">
+            <summary>
+            Создать администрацию
+            </summary>
+            <param name="administration">Параметры для создания администрации</param>
+            <response code="200">Созданная администрация</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdministrationsController.Put(Coolbuh.Core.UseCases.Handlers.ListAdministrations.Dto.UpdateListAdministrationDto)">
+            <summary>
+            Обновить администрацию
+            </summary>
+            <param name="administration">Параметры для обновления администрации</param>
+            <response code="200">Обновленная администрация</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListAdministrationsController.Delete(Coolbuh.Core.UseCases.Handlers.ListAdministrations.Dto.DeleteListAdministrationDto)">
+            <summary>
+            Удалить администрацию
+            </summary>
+            <param name="administration">Параметры для удаления администрации</param>
+            <response code="200">Удаленная администрация</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListCardStatusTypesController">
+            <summary>
+            Справочник "Типы статусов карточки"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListCardStatusTypesController.Get">
+            <summary>
+            Получить список типов статусов карточки
+            </summary>
+            <response code="200">Список типов статусов карточки</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListDepartmentsController">
+            <summary>
+            Справочник "Подразделения"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListDepartmentsController.Get">
+            <summary>
+            Получить список подразделений
+            </summary>
+            <response code="200">Список подразделений</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListDepartmentsController.Post(Coolbuh.Core.UseCases.Handlers.ListDepartments.Dto.CreateListDepartmentDto)">
+            <summary>
+            Создать подразделение
+            </summary>
+            <param name="department">Параметры для создания подразделения</param>
+            <response code="200">Созданное подразделение</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListDepartmentsController.Put(Coolbuh.Core.UseCases.Handlers.ListDepartments.Dto.UpdateListDepartmentDto)">
+            <summary>
+            Обновить подразделение
+            </summary>
+            <param name="department">Параметры для обновления подразделения</param>
+            <response code="200">Обновленное подразделение</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListDepartmentsController.Delete(Coolbuh.Core.UseCases.Handlers.ListDepartments.Dto.DeleteListDepartmentDto)">
+            <summary>
+            Удалить подразделение
+            </summary>
+            <param name="department">Параметры для удаления подразделения</param>
+            <response code="200">Удаленное подразделение</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListGradeAllowancesController">
+            <summary>
+            Справочник "Надбавки за классность"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Get">
+            <summary>
+            Получить список надбавок за классность
+            </summary>
+            <response code="200">Список надбавок за классность</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Get(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Получить надбавку за классность
+            </summary>
+            <response code="200">Надбавки зарплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Post(Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Dto.CreateListGradeAllowanceDto)">
+            <summary>
+            Создать надбавку за классность
+            </summary>
+            <param name="gradeAllowance">Параметры для создания надбавки за классность</param>
+            <response code="200">Созданная надбавка за классность</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Put(Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Dto.UpdateListGradeAllowanceDto)">
+            <summary>
+            Обновить надбавку за классность
+            </summary>
+            <param name="gradeAllowance">Параметры для обновления надбавки за классность</param>
+            <response code="200">Обновленная надбавка за классность</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Delete(Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Dto.DeleteListGradeAllowanceDto)">
+            <summary>
+            Удалить надбавку за классность
+            </summary>
+            <param name="gradeAllowance">Параметры для удаления надбавки за классность</param>
+            <response code="200">Удаленная надбавка за классность</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListLivingWagesController">
+            <summary>
+            Справочник "Прожиточные минимумы"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListLivingWagesController.Get">
+            <summary>
+            Получить список прожиточных минимумов
+            </summary>
+            <response code="200">Список прожиточных минимумов</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListLivingWagesController.Post(Coolbuh.Core.UseCases.Handlers.ListLivingWages.Dto.CreateListLivingWageDto)">
+            <summary>
+            Создать прожиточный минимум
+            </summary>
+            <param name="livingWage">Параметры для создания прожиточного минимума</param>
+            <response code="200">Cозданный прожиточный минимум</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListLivingWagesController.Put(Coolbuh.Core.UseCases.Handlers.ListLivingWages.Dto.UpdateListLivingWageDto)">
+            <summary>
+            Обновить прожиточный минимум
+            </summary>
+            <param name="livingWage">Параметры для обновления прожиточного минимума</param>
+            <response code="200">Обновленный прожиточный минимум</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListLivingWagesController.Delete(Coolbuh.Core.UseCases.Handlers.ListLivingWages.Dto.DeleteListLivingWageDto)">
+            <summary>
+            Удалить прожиточный минимум
+            </summary>
+            <param name="livingWage">Параметры для удаления прожиточного минимума</param>
+            <response code="200">Удаленный прожиточный минимум</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListMinimumSalariesController">
+            <summary>
+            Справочник "Минимальные зарплаты"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListMinimumSalariesController.Get">
+            <summary>
+            Получить список минимальных зарплат
+            </summary>
+            <response code="200">Список минимальных зарплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListMinimumSalariesController.Post(Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Dto.CreateListMinimumSalaryDto)">
+            <summary>
+            Создать минимальную зарплату
+            </summary>
+            <param name="minimumSalary">Параметры для создания минимальной зарплаты</param>
+            <response code="200">Созданная минимальная зарплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListMinimumSalariesController.Put(Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Dto.UpdateListMinimumSalaryDto)">
+            <summary>
+            Обновить минимальную зарплату
+            </summary>
+            <param name="minimumSalary">Параметры для обновления минимальной зарплаты</param>
+            <response code="200">Обновленная минимальная зарплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListMinimumSalariesController.Delete(Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Dto.DeleteListMinimumSalaryDto)">
+            <summary>
+            Удалить минимальную зарплату
+            </summary>
+            <param name="minimumSalary">Параметры для удаления минимальной зарплаты</param>
+            <response code="200">Удаленная минимальная зарплата</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListOtherAllowancesController">
+            <summary>
+            Справочник "Другие надбавки"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListOtherAllowancesController.Get">
+            <summary>
+            Получить список других надбавок
+            </summary>
+            <response code="200">Список других надбавок</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListOtherAllowancesController.Post(Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Dto.CreateListOtherAllowanceDto)">
+            <summary>
+            Создать другую надбавку
+            </summary>
+            <param name="otherAllowance">Параметры для создания другой надбавки</param>
+            <response code="200">Созданная другая надбавка</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListOtherAllowancesController.Put(Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Dto.UpdateListOtherAllowanceDto)">
+            <summary>
+            Обновить другую надбавку
+            </summary>
+            <param name="otherAllowance">Параметры для обновления другой надбавки</param>
+            <response code="200">Обновленная другая надбавка</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListOtherAllowancesController.Delete(Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Dto.DeleteListOtherAllowanceDto)">
+            <summary>
+            Удалить другую надбавку
+            </summary>
+            <param name="otherAllowance">Параметры для удаления другой надбавки</param>
+            <response code="200">Удаленная другая надбавка</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListPensionAllowancesController">
+            <summary>
+            Справочник "Надбавки за пенсию"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListPensionAllowancesController.Get">
+            <summary>
+            Получить список надбавок за пенсию
+            </summary>
+            <response code="200">Список надбавок за пенсию</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListPensionAllowancesController.Post(Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Dto.CreateListPensionAllowanceDto)">
+            <summary>
+            Создать надбавку за пенсию
+            </summary>
+            <param name="pensionAllowance">Параметры для создания надбавки за пенсию</param>
+            <response code="200">Созданная надбавка за пенсию</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListPensionAllowancesController.Put(Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Dto.UpdateListPensionAllowanceDto)">
+            <summary>
+            Обновить надбавку за пенсию
+            </summary>
+            <param name="pensionAllowance">Параметры для обновления надбавки за пенсию</param>
+            <response code="200">Обновленная надбавка за пенсию</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListPensionAllowancesController.Delete(Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Dto.DeleteListPensionAllowanceDto)">
+            <summary>
+            Удалить надбавку за пенсию
+            </summary>
+            <param name="pensionAllowance">Параметры для удаления надбавки за пенсию</param>
+            <response code="200">Удаленная надбавка за пенсию</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListPositionsController">
+            <summary>
+            Справочник "Должности"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListPositionsController.Get">
+            <summary>
+            Получить список должностей
+            </summary>
+            <response code="200">Список должностей</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListSocialBenefitsController">
+            <summary>
+            Справочник "Социальные льготы"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSocialBenefitsController.Get">
+            <summary>
+            Получить список социальных льгот
+            </summary>
+            <response code="200">Список социальных льгот</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSocialBenefitsController.Post(Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Dto.CreateListSocialBenefitDto)">
+            <summary>
+            Создать социальную льготу
+            </summary>
+            <param name="socialBenefit">Параметры для создания социальной льготы</param>
+            <response code="200">Созданная социальная льгота</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSocialBenefitsController.Put(Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Dto.UpdateListSocialBenefitDto)">
+            <summary>
+            Обновить социальную льготу
+            </summary>
+            <param name="socialBenefit">Параметры для обновления социальной льготы</param>
+            <response code="200">Обновленная социальная льгота</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSocialBenefitsController.Delete(Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Dto.DeleteListSocialBenefitDto)">
+            <summary>
+            Удалить социальную льготу
+            </summary>
+            <param name="socialBenefit">Параметры для удаления социальной льготы</param>
+            <response code="200">Удаленная социальная льгота</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.ListSpecialSenioritiesController">
+            <summary>
+            Справочник "Спецстажи"
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSpecialSenioritiesController.Get">
+            <summary>
+            Получить список спецстажей
+            </summary>
+            <response code="200">Список спецстажей</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSpecialSenioritiesController.Post(Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Dto.CreateListSpecialSeniorityDto)">
+            <summary>
+            Создать спецстаж
+            </summary>
+            <param name="specialSeniority">Параметры для создания спецстажа</param>
+            <response code="200">Созданный спецстаж</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSpecialSenioritiesController.Put(Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Dto.UpdateListSpecialSeniorityDto)">
+            <summary>
+            Обновить спецстаж
+            </summary>
+            <param name="specialSeniority">Параметры для обновления спецстажа</param>
+            <response code="200">Обновленный спецстаж</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.ListSpecialSenioritiesController.Delete(Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Dto.DeleteListSpecialSeniorityDto)">
+            <summary>
+            Удалить спецстаж
+            </summary>
+            <param name="specialSeniority">Параметры для удаления спецстажа</param>
+            <response code="200">Удаленный спецстаж</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.PaymentsController">
+            <summary>
+            Выплаты
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.PaymentsController.Get(System.DateTime,System.DateTime)">
+            <summary>
+            Получить список выплат
+            </summary>
+            <response code="200">Список выплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.PaymentsController.Post(Coolbuh.Core.UseCases.Handlers.Payments.Dto.CreatePaymentDto)">
+            <summary>
+            Создать выплату
+            </summary>
+            <param name="payment">Параметры для создания выплаты</param>
+            <response code="200">Созданная выплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.PaymentsController.Put(Coolbuh.Core.UseCases.Handlers.Payments.Dto.UpdatePaymentDto)">
+            <summary>
+            Обновить выплату
+            </summary>
+            <param name="payment">Параметры для обновления выплаты</param>
+            <response code="200">Измененная выплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.PaymentsController.Delete(Coolbuh.Core.UseCases.Handlers.Payments.Dto.DeletePaymentDto)">
+            <summary>
+            Удалить выплату
+            </summary>
+            <param name="payment">Параметры для удаления выплаты</param>
+            <response code="200">Удаленная выплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SalariesController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список зарплат
+            </summary>
+            <response code="200">Список зарплат</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SalariesController.Post(Coolbuh.Core.UseCases.Handlers.Salaries.Dto.CreateSalaryDto)">
+            <summary>
+            Создать зарплату
+            </summary>
+            <param name="salary">Параметры для создания зарплаты</param>
+            <response code="200">Созданная зарплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SalariesController.Post(Coolbuh.Core.UseCases.Handlers.Salaries.Dto.CalculateSalaryDto)">
+            <summary>
+            Рассчитать зарплату
+            </summary>
+            <param name="salary">Параметры для расчета зарплаты</param>
+            <response code="200">Рассчитанная зарплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SalariesController.Put(Coolbuh.Core.UseCases.Handlers.Salaries.Dto.UpdateSalaryDto)">
+            <summary>
+            Обновить зарплату
+            </summary>
+            <param name="salary">Параметры для обновления зарплаты</param>
+            <response code="200">Измененная зарплата</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SalariesController.Delete(Coolbuh.Core.UseCases.Handlers.Salaries.Dto.DeleteSalaryDto)">
+            <summary>
+            Удалить зарплату
+            </summary>
+            <param name="salary">Параметры для удаления зарплаты</param>
+            <response code="200">Удаленная зарплата</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.SickListsController">
+            <summary>
+            Больничные листы
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SickListsController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список больничных листов
+            </summary>
+            <response code="200">Список больничных листов</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SickListsController.Post(Coolbuh.Core.UseCases.Handlers.SickLists.Dto.CreateSickListDto)">
+            <summary>
+            Создать больничный лист
+            </summary>
+            <param name="sickList">Параметры для создания больничного листа</param>
+            <response code="200">Созданный больничный лист</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SickListsController.Put(Coolbuh.Core.UseCases.Handlers.SickLists.Dto.UpdateSickListDto)">
+            <summary>
+            Обновить больничный лист
+            </summary>
+            <param name="sickList">Параметры для обновления больничного листа</param>
+            <response code="200">Измененный больничный лист</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.SickListsController.Delete(Coolbuh.Core.UseCases.Handlers.SickLists.Dto.DeleteSickListDto)">
+            <summary>
+            Удалить больничный лист
+            </summary>
+            <param name="sickList">Параметры для удаления больничного листа</param>
+            <response code="200">Удаленный больничный лист</response>
+        </member>
+        <member name="T:Coolbuh.Core.Controllers.VocationsController">
+            <summary>
+            Отпуска
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.VocationsController.Get(System.DateTime,System.DateTime,System.Nullable{System.Int32})">
+            <summary>
+            Получить список отпусков
+            </summary>
+            <response code="200">Список отпусков</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.VocationsController.Post(Coolbuh.Core.UseCases.Handlers.Vocations.Dto.CreateVocationDto)">
+            <summary>
+            Создать отпуск
+            </summary>
+            <param name="vocation">Параметры для создания отпуска</param>
+            <response code="200">Добавленный отпуск</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.VocationsController.Put(Coolbuh.Core.UseCases.Handlers.Vocations.Dto.UpdateVocationDto)">
+            <summary>
+            Обновить отпуск
+            </summary>
+            <param name="vocation">Параметры для обновления отпуска</param>
+            <response code="200">Измененный отпуск</response>
+        </member>
+        <member name="M:Coolbuh.Core.Controllers.VocationsController.Delete(Coolbuh.Core.UseCases.Handlers.Vocations.Dto.DeleteVocationDto)">
+            <summary>
+            Удалить отпуск
+            </summary>
+            <param name="vocation">Параметры для удаления отпуска</param>
+            <response code="200">Удаленный отпуск</response>
+        </member>
+    </members>
+</doc>

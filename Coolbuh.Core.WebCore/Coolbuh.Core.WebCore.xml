@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Coolbuh.Core.WebCore</name>
+    </assembly>
+    <members>
+        <member name="T:Coolbuh.Core.WebCore.DependencyInjection.DomainServiceDIExtensions">
+            <summary>
+            Внедрение зависимости доменных сервисов 
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.WebCore.DependencyInjection.DomainServiceDIExtensions.AddDomainServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Добавить зависимости доменных сервисов
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:Coolbuh.Core.WebCore.DependencyInjection.SwaggerDIExtension">
+            <summary>
+            Swagger
+            </summary>
+        </member>
+        <member name="M:Coolbuh.Core.WebCore.DependencyInjection.SwaggerDIExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Добавить swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:Coolbuh.Core.WebCore.Middleware.ExceptionMiddleware">
+            <summary>
+            Промежуточное ПО обработки ошибок
+            </summary>
+        </member>
+        <member name="T:Coolbuh.Core.WebCore.Middleware.ExceptionMiddlewareExtensions">
+            <summary>
+            Подключение промежуточного ПО обработки ошибок
+            </summary>
+        </member>
+        <member name="T:Coolbuh.Core.WebCore.Middleware.PerfomanceMiddleware">
+            <summary>
+            Промежуточное ПО измерения производительности
+            </summary>
+        </member>
+        <member name="T:Coolbuh.Core.WebCore.Middleware.PerfomanceMiddlewareExtensions">
+            <summary>
+            Подключение промежуточного ПО измерения производительности
+            </summary>
+        </member>
+    </members>
+</doc>
