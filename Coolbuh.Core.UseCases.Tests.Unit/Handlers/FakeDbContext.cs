@@ -32,7 +32,7 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
                     Sum = 10,
                     EmployeeCard = employeeCard,
                     Department = department,
-                    AdditionalAccrualType = additionalAccrualType
+                    AdditionalAccrualType = additionalAccrualType                    
                 },
                 new AdditionalAccrual
                 {
@@ -190,7 +190,12 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
                     EntryDate = null,
                     DismissalDate = null,
                     PensionDate = new DateTime(2019, 01, 01),
-                    Sex = EmployeeCardSex.Male
+                    Sex = EmployeeCardSex.Male,
+                    EmployeeCardStatuses = new List<EmployeeCardStatus>(),
+                    EmployeeChildren = new List<EmployeeChildren>(),
+                    EmployeeDisabilities = new List<EmployeeDisability>(),
+                    EmployeeSpecialSeniorities = new List<EmployeeSpecialSeniority>(),
+                    EmployeeTaxReliefs = new List<EmployeeTaxRelief>()
                 },
                 new EmployeeCard
                 {
@@ -205,7 +210,12 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
                     EntryDate = null,
                     DismissalDate = null,
                     PensionDate = null,
-                    Sex = EmployeeCardSex.Female
+                    Sex = EmployeeCardSex.Female,
+                    EmployeeCardStatuses = new List<EmployeeCardStatus>(),
+                    EmployeeChildren = new List<EmployeeChildren>(),
+                    EmployeeDisabilities = new List<EmployeeDisability>(),
+                    EmployeeSpecialSeniorities = new List<EmployeeSpecialSeniority>(),
+                    EmployeeTaxReliefs = new List<EmployeeTaxRelief>()
                 }
             };
 

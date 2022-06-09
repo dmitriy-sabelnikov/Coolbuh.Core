@@ -375,9 +375,11 @@
         </member>
         <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Get(System.Int32,System.Nullable{System.Int32})">
             <summary>
-            Получить надбавку за классность
+            Получить надбавки за классность
             </summary>
-            <response code="200">Надбавки зарплат</response>
+            <param name="departmentId">Идентификатор подразделения</param>
+            <param name="grade">Классность</param>
+            <response code="200">Надбавки за классность</response>
         </member>
         <member name="M:Coolbuh.Core.Controllers.ListGradeAllowancesController.Post(Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Dto.CreateListGradeAllowanceDto)">
             <summary>

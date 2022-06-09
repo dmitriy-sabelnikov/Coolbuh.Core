@@ -1,18 +1,18 @@
 ﻿using Coolbuh.Core.Infrastructure.Interfaces.DataAccess;
-using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGradeAllowanceByParams;
+using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGradeAllowancesByParams;
 using Moq;
 using Xunit;
 
-namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.ListGradeAllowances.Queries.GetListGradeAllowanceByParams
+namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.ListGradeAllowances.Queries.GetListGradeAllowancesByParams
 {
     /// <summary>
     /// Тестирование запроса "Получить надбавку за классность"
     /// </summary>
-    public class GetListGradeAllowanceByParamsUnitTest
+    public class GetListGradeAllowancesByParamsUnitTest
     {
         private readonly Mock<IDbContext> _fakeDbContext;
 
-        public GetListGradeAllowanceByParamsUnitTest()
+        public GetListGradeAllowancesByParamsUnitTest()
         {
             _fakeDbContext = FakeDbRepository.GetFakeDbContext();
 
@@ -30,11 +30,16 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.ListGradeAllowances.Queries.
         {
             // Arrange
             var gradeAllowance = _fakeDbContext.Object.ListGradeAllowances.First();
+            
+            var count = _fakeDbContext.Object.ListGradeAllowances
+                .Where(rec => rec.DepartmentId == gradeAllowance.DepartmentId &&
+                    rec.Grade == gradeAllowance.Grade)
+                .Count();
 
-            var query = new GetListGradeAllowanceByParamsRequestHandler(_fakeDbContext.Object);
-            var request = new GetListGradeAllowanceByParamsRequest()
+            var query = new GetListGradeAllowancesByParamsRequestHandler(_fakeDbContext.Object);
+            var request = new GetListGradeAllowancesByParamsRequest()
             {
-                DepartmentId = gradeAllowance.Id,
+                DepartmentId = gradeAllowance.DepartmentId,
                 Grade = gradeAllowance.Grade
             };
 
@@ -43,8 +48,7 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.ListGradeAllowances.Queries.
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(gradeAllowance.Id, result.Id);
-            Assert.Equal(gradeAllowance.Name, result.Name);
+            Assert.Equal(count, result.Count);
         }
     }
 }

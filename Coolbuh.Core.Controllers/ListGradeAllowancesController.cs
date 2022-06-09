@@ -2,7 +2,7 @@
 using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.DeleteListGradeAllowance;
 using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.UpdateListGradeAllowance;
 using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Dto;
-using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGradeAllowanceByParams;
+using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGradeAllowancesByParams;
 using Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGradeAllowances;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,13 +31,15 @@ namespace Coolbuh.Core.Controllers
         }
 
         /// <summary>
-        /// Получить надбавку за классность
+        /// Получить надбавки за классность
         /// </summary>
-        /// <response code="200">Надбавки зарплат</response>
+        /// <param name="departmentId">Идентификатор подразделения</param>
+        /// <param name="grade">Классность</param>
+        /// <response code="200">Надбавки за классность</response>
         [HttpGet("{departmentId:int}")]
-        public async Task<ListGradeAllowanceDto> Get(int departmentId, int? grade)
+        public async Task<List<ListGradeAllowanceDto>> Get(int departmentId, int? grade)
         {
-            return await _mediator.Send(new GetListGradeAllowanceByParamsRequest()
+            return await _mediator.Send(new GetListGradeAllowancesByParamsRequest()
             {
                 DepartmentId = departmentId,
                 Grade = grade
