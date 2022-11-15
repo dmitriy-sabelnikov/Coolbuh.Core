@@ -13,7 +13,6 @@ namespace Coolbuh.Core.DomainServices.Implementation
         {
             if (livingWage == null) throw new ArgumentNullException(nameof(livingWage));
 
-
             if (livingWage.PeriodEnd != null && livingWage.PeriodBegin != null &&
                 livingWage.PeriodEnd < livingWage.PeriodBegin)
                 throw new NotValidEntityEntityException("Дата початку більше за дату закінчення");

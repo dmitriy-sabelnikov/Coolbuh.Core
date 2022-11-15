@@ -64,7 +64,6 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.AdditionalPayments.Commands.
         /// <param name="employeeCard">Карточки работника</param>
         /// <param name="additionalPaymentType">Типы дополнительных выплат</param>
         /// <returns>DTO создания "Дополнительная выплата"</returns>
-        /// <exception cref="NullReferenceException"></exception>
         private static CreateAdditionalPaymentDto GetFakeCreateAdditionalPaymentDto()
         {
             return new CreateAdditionalPaymentDto

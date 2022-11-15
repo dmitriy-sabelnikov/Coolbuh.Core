@@ -44,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Commands.UpdateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.OtherAllowance == null) throw new NullReferenceException(nameof(request.OtherAllowance));
+            if (request.OtherAllowance == null) throw new InvalidOperationException("request.OtherAllowance is null");
 
             await CheckUpdateListOtherAllowanceDtoAsync(request.OtherAllowance, cancellationToken);
 
@@ -74,7 +74,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Commands.UpdateList
                 .Where(rec => rec.Code == otherAllowance.Code || rec.Id == otherAllowance.Id)
                 .ToListAsync(cancellationToken);
 
-            if (otherAllowances.Any(rec => rec.Id == otherAllowance.Id) == false)
+            if (!otherAllowances.Any(rec => rec.Id == otherAllowance.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутня надбавка в базі (id: {otherAllowance.Id})");
 
             if (otherAllowances.Any(rec => rec.Id != otherAllowance.Id))

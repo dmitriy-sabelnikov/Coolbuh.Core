@@ -44,12 +44,12 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Commands.UpdateListS
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SocialBenefit == null) throw new NullReferenceException(nameof(request.SocialBenefit));
+            if (request.SocialBenefit == null) throw new InvalidOperationException("request.SocialBenefit is null");
 
             var socialBenefit = request.SocialBenefit.MapListSocialBenefit();
             var socialBenefits = await _dbContext.ListSocialBenefits.AsNoTracking().ToListAsync(cancellationToken);
 
-            if (socialBenefits.Any(rec => rec.Id == socialBenefit.Id) == false)
+            if (!socialBenefits.Any(rec => rec.Id == socialBenefit.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутня соціальна пільга в базі (id: {socialBenefit.Id})");
 
             _socialBenefitsService.ValidationEntity(socialBenefit);

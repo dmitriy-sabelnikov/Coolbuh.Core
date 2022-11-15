@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Commands.CreateListS
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SocialBenefit == null) throw new NullReferenceException(nameof(request.SocialBenefit));
+            if (request.SocialBenefit == null) throw new InvalidOperationException("request.SocialBenefit is null");
 
             var socialBenefit = request.SocialBenefit.MapListSocialBenefit();
             _socialBenefitsService.ValidationEntity(socialBenefit);
@@ -56,7 +56,6 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Commands.CreateListS
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return socialBenefit.MapListSocialBenefitDto();
-
         }
     }
 }

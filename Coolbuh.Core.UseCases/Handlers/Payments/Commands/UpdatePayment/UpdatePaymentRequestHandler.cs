@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.UpdatePayment
         public async Task<PaymentDto> Handle(UpdatePaymentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Payment == null) throw new NullReferenceException(nameof(request.Payment));
+            if (request.Payment == null) throw new InvalidOperationException("request.Payment is null");
 
             await CheckUpdatePaymentDtoAsync(request.Payment, cancellationToken);
 
@@ -63,12 +63,12 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.UpdatePayment
         {
             if (payment == null) throw new ArgumentNullException(nameof(payment));
 
-            if (await _dbContext.Payments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == payment.Id, cancellationToken) == false)
+            if (!await _dbContext.Payments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == payment.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня виплата в базі (id: {payment.Id})");
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == payment.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == payment.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з {payment.EmployeeCardId}");
         }
     }

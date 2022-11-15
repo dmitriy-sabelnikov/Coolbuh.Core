@@ -43,7 +43,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.CreateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Administration == null) throw new NullReferenceException(nameof(request.Administration));
+            if (request.Administration == null) 
+                throw new InvalidOperationException("request.Administration is null");
 
             await CheckCreateListAdministrationDtoAsync(request.Administration, cancellationToken);
 
@@ -68,8 +69,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.CreateList
         {
             if (administration == null) throw new ArgumentNullException(nameof(administration));
 
-            if (await _dbContext.ListPositions.AsNoTracking()
-                .AnyAsync(rec => rec.Id == administration.PositionId, cancellationToken) == false)
+            if (!await _dbContext.ListPositions.AsNoTracking()
+                .AnyAsync(rec => rec.Id == administration.PositionId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня посада в базі з {administration.PositionId}");
         }
     }

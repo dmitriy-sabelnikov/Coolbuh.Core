@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
         /// <returns>Другая надбавка</returns>
         public static ListOtherAllowance MapListOtherAllowance(this CreateListOtherAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListOtherAllowance
             {
@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
         /// <returns>Другая надбавка</returns>
         public static ListOtherAllowance MapListOtherAllowance(this UpdateListOtherAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListOtherAllowance
             {
@@ -55,7 +55,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
         /// <returns>DTO "Другие надбавки"</returns>
         public static ListOtherAllowanceDto MapListOtherAllowanceDto(this ListOtherAllowance otherAllowance)
         {
-            if (otherAllowance == null) throw new NullReferenceException(nameof(otherAllowance));
+            if (otherAllowance == null) throw new ArgumentNullException(nameof(otherAllowance));
 
             return new ListOtherAllowanceDto
             {
@@ -63,7 +63,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
                 Code = otherAllowance.Code,
                 Name = otherAllowance.Name,
                 Percent = otherAllowance.Percent,
-                UseAllowance = (otherAllowance.Flags & (int)ListOtherAllowanceFlags.NoUse) <= 0
+                UseAllowance = (otherAllowance.Flags & (int)ListOtherAllowanceActions.NoUse) <= 0
             };
         }
 
@@ -81,7 +81,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
                 Code = otherAllowance.Code,
                 Name = otherAllowance.Name,
                 Percent = otherAllowance.Percent,
-                UseAllowance = (otherAllowance.Flags & (int)ListOtherAllowanceFlags.NoUse) <= 0
+                UseAllowance = (otherAllowance.Flags & (int)ListOtherAllowanceActions.NoUse) <= 0
             });
         }
 
@@ -94,7 +94,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Extensions
         {
             var flags = 0;
             if (!useAllowance)
-                flags += (int)ListOtherAllowanceFlags.NoUse;
+                flags += (int)ListOtherAllowanceActions.NoUse;
 
             return flags;
         }

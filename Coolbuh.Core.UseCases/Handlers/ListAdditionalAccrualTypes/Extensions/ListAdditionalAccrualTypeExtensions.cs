@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Extensions
         /// <returns>Тип дополнительных начислений</returns>
         public static ListAdditionalAccrualType MapListAdditionalAccrualType(this CreateListAdditionalAccrualTypeDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListAdditionalAccrualType
             {
@@ -35,7 +35,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Extensions
         /// <returns>Тип дополнительных начислений</returns>
         public static ListAdditionalAccrualType MapListAdditionalAccrualType(this UpdateListAdditionalAccrualTypeDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListAdditionalAccrualType
             {
@@ -54,14 +54,14 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Extensions
         public static ListAdditionalAccrualTypeDto MapListAdditionalAccrualTypeDto(
             this ListAdditionalAccrualType additionalAccrualType)
         {
-            if (additionalAccrualType == null) throw new NullReferenceException(nameof(additionalAccrualType));
+            if (additionalAccrualType == null) throw new ArgumentNullException(nameof(additionalAccrualType));
 
             return new ListAdditionalAccrualTypeDto
             {
                 Id = additionalAccrualType.Id,
                 Code = additionalAccrualType.Code,
                 Name = additionalAccrualType.Name,
-                IsCalculate = (additionalAccrualType.Flags & (int)ListAdditionalAccrualTypeFlags.Calculate) > 0
+                IsCalculate = (additionalAccrualType.Flags & (int)ListAdditionalAccrualTypeActions.Calculate) > 0
             };
         }
 
@@ -78,7 +78,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Extensions
                 Id = additionalAccrualType.Id,
                 Code = additionalAccrualType.Code,
                 Name = additionalAccrualType.Name,
-                IsCalculate = (additionalAccrualType.Flags & (int)ListAdditionalAccrualTypeFlags.Calculate) > 0
+                IsCalculate = (additionalAccrualType.Flags & (int)ListAdditionalAccrualTypeActions.Calculate) > 0
             });
         }
 
@@ -91,7 +91,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Extensions
         {
             var flags = 0;
             if (isCalculate)
-                flags += (int)ListAdditionalAccrualTypeFlags.Calculate;
+                flags += (int)ListAdditionalAccrualTypeActions.Calculate;
 
             return flags;
         }

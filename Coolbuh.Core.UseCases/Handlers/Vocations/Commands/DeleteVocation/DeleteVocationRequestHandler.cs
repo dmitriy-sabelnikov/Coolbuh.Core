@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Commands.DeleteVocation
         public async Task<VocationDto> Handle(DeleteVocationRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Vocation == null) throw new NullReferenceException(nameof(request.Vocation));
+            if (request.Vocation == null) throw new InvalidOperationException("request.Vocation is null");
 
             var vocation = await GetVocationAsync(request.Vocation.Id, cancellationToken);
 

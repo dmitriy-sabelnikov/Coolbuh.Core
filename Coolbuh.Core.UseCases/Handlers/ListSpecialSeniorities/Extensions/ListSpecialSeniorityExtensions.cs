@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Extensions
         /// <returns>Спецстаж</returns>
         public static ListSpecialSeniority MapListSpecialSeniority(this CreateListSpecialSeniorityDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListSpecialSeniority
             {
@@ -34,7 +34,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Extensions
         /// <returns>Спецстаж</returns>
         public static ListSpecialSeniority MapListSpecialSeniority(this UpdateListSpecialSeniorityDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListSpecialSeniority
             {
@@ -52,7 +52,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Extensions
         /// <returns>DTO "Спецстажи"</returns>
         public static ListSpecialSeniorityDto MapListSpecialSeniorityDto(this ListSpecialSeniority specialSeniority)
         {
-            if (specialSeniority == null) throw new NullReferenceException(nameof(specialSeniority));
+            if (specialSeniority == null) throw new ArgumentNullException(nameof(specialSeniority));
 
             return new ListSpecialSeniorityDto
             {

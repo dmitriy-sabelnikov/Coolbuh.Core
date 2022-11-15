@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Commands.DeleteLi
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.PensionAllowance == null) throw new NullReferenceException(nameof(request.PensionAllowance));
+            if (request.PensionAllowance == null) throw new InvalidOperationException("request.PensionAllowance is null");
 
             var pensionAllowance =
                 await GetListPensionAllowanceAsync(request.PensionAllowance.Id, cancellationToken);

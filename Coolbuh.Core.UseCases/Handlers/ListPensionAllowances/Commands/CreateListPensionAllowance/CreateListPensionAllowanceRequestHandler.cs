@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Commands.CreateLi
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.PensionAllowance == null) throw new NullReferenceException(nameof(request.PensionAllowance));
+            if (request.PensionAllowance == null) throw new InvalidOperationException("request.PensionAllowance is null");
 
             await CheckCreateListPensionAllowanceDtoAsync(request.PensionAllowance, cancellationToken);
 

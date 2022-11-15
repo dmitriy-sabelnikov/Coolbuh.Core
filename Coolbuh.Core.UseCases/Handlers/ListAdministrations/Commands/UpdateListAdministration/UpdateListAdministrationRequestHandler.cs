@@ -43,7 +43,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.UpdateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Administration == null) throw new NullReferenceException(nameof(request.Administration));
+            if (request.Administration == null) 
+                throw new InvalidOperationException("request.Administration is null");
 
             await CheckUpdateListAdministrationDtoAsync(request.Administration, cancellationToken);
 
@@ -68,12 +69,12 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.UpdateList
         {
             if (administration == null) throw new ArgumentNullException(nameof(administration));
 
-            if (await _dbContext.ListAdministrations.AsNoTracking()
-                .AnyAsync(rec => rec.Id == administration.Id, cancellationToken) == false)
+            if (!await _dbContext.ListAdministrations.AsNoTracking()
+                .AnyAsync(rec => rec.Id == administration.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня адміністрація в базі (id: {administration.Id})");
 
-            if (await _dbContext.ListPositions.AsNoTracking()
-               .AnyAsync(rec => rec.Id == administration.PositionId, cancellationToken) == false)
+            if (!await _dbContext.ListPositions.AsNoTracking()
+               .AnyAsync(rec => rec.Id == administration.PositionId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня посада в базі з {administration.PositionId}");
         }
     }

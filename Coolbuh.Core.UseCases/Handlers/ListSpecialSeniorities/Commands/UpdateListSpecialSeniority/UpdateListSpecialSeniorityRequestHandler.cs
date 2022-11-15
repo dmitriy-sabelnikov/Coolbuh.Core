@@ -45,7 +45,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Commands.UpdateL
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.SpecialSeniority == null)
-                throw new NullReferenceException(nameof(request.SpecialSeniority));
+                throw new InvalidOperationException("request.SpecialSeniority is null");
 
             await CheckUpdateListSpecialSeniorityDtoAsync(request.SpecialSeniority, cancellationToken);
 
@@ -75,7 +75,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Commands.UpdateL
                 .Where(rec => rec.Code == specialSeniority.Code || rec.Id == specialSeniority.Id)
                 .ToListAsync(cancellationToken);
 
-            if (specialSeniorities.Any(rec => rec.Id == specialSeniority.Id) == false)
+            if (!specialSeniorities.Any(rec => rec.Id == specialSeniority.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутній спецстаж в базі (id: {specialSeniority.Id})");
 
             if (specialSeniorities.Any(rec => rec.Id != specialSeniority.Id))

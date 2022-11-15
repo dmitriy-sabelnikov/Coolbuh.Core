@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Extensions
         /// <returns>Больничный лист</returns>
         public static SickList MapSickList(this CreateSickListDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new SickList
             {
@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Extensions
         /// <returns>Больничный лист</returns>
         public static SickList MapSickList(this UpdateSickListDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new SickList
             {
@@ -62,7 +62,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Extensions
         /// <returns>DTO "Больничный лист"</returns>
         public static SickListDto MapSickListDto(this SickList sickList)
         {
-            if (sickList == null) throw new NullReferenceException(nameof(sickList));
+            if (sickList == null) throw new ArgumentNullException(nameof(sickList));
 
             return new SickListDto
             {

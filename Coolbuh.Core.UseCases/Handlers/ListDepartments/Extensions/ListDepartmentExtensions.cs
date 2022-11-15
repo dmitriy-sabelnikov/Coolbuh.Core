@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Extensions
         /// <returns>Подразделение</returns>
         public static ListDepartment MapListDepartment(this CreateListDepartmentDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListDepartment
             {
@@ -33,7 +33,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Extensions
         /// <returns>Подразделение</returns>
         public static ListDepartment MapListDepartment(this UpdateListDepartmentDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListDepartment
             {
@@ -50,7 +50,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Extensions
         /// <returns>DTO "Подразделения"</returns>
         public static ListDepartmentDto MapListDepartmentDto(this ListDepartment department)
         {
-            if (department == null) throw new NullReferenceException(nameof(department));
+            if (department == null) throw new ArgumentNullException(nameof(department));
 
             return new ListDepartmentDto
             {

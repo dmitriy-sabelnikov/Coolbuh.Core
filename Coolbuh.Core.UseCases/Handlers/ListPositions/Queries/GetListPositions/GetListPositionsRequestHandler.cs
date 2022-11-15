@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPositions.Queries.GetListPositions
 
             var positions = _dbContext.ListPositions.AsNoTracking().SelectListPositionDtos();
 
-            return await positions.ToListAsync();
+            return await positions.ToListAsync(cancellationToken);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Commands.Upd
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalPaymentType == null)
-                throw new NullReferenceException(nameof(request.AdditionalPaymentType));
+                throw new InvalidOperationException("request.AdditionalPaymentType is null");
 
             await CheckUpdateListAdditionalPaymentTypeDtoAsync(request.AdditionalPaymentType, cancellationToken);
 
@@ -75,7 +75,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Commands.Upd
                 .Where(rec => rec.Code == additionalPaymentType.Code || rec.Id == additionalPaymentType.Id)
                 .ToListAsync(cancellationToken);
 
-            if (additionalPaymentTypes.Any(rec => rec.Id == additionalPaymentType.Id) == false)
+            if (!additionalPaymentTypes.Any(rec => rec.Id == additionalPaymentType.Id))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній тип додаткових виплат в базі (id: {additionalPaymentType.Id})");
 

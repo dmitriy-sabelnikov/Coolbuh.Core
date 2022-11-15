@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Commands.DeleteListLivi
         public async Task<ListLivingWageDto> Handle(DeleteListLivingWageRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.LivingWage == null) throw new NullReferenceException(nameof(request.LivingWage));
+            if (request.LivingWage == null) throw new InvalidOperationException("request.LivingWage is null");
 
             var livingWage = await GetListLivingWageAsync(request.LivingWage.Id, cancellationToken);
 

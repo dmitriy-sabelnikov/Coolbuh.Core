@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Extensions
         /// <returns>Дополнительное начисление</returns>
         public static AdditionalAccrual MapAdditionalAccrual(this CreateAdditionalAccrualDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new AdditionalAccrual
             {
@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Extensions
         /// <returns>Дополнительное начисление</returns>
         public static AdditionalAccrual MapAdditionalAccrual(this UpdateAdditionalAccrualDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new AdditionalAccrual
             {
@@ -56,7 +56,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Extensions
         /// <returns>DTO "Дополнительное начисление"</returns>
         public static AdditionalAccrualDto MapAdditionalAccrualDto(this AdditionalAccrual additionalAccrual)
         {
-            if (additionalAccrual == null) throw new NullReferenceException(nameof(additionalAccrual));
+            if (additionalAccrual == null) throw new ArgumentNullException(nameof(additionalAccrual));
 
             return new AdditionalAccrualDto
             {

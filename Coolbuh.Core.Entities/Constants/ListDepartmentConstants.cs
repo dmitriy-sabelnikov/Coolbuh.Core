@@ -4,7 +4,7 @@ namespace Coolbuh.Core.Entities.Constants
     /// <summary>
     /// Константы справочника "Подразделения"
     /// </summary>
-    public class ListDepartmentConstants
+    public static class ListDepartmentConstants
     {
         /// <summary>
         /// Максимальная длина кода

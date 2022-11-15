@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.DeleteAddit
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.AdditionalAccrual == null) throw new NullReferenceException(nameof(request.AdditionalAccrual));
+            if (request.AdditionalAccrual == null) throw new InvalidOperationException("request.AdditionalAccrual is null");
 
             var additionalAccrual = await GetAdditionalAccrual(request.AdditionalAccrual.Id, cancellationToken);
 

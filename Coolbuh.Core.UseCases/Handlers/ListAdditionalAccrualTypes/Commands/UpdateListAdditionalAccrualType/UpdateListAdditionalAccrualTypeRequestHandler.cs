@@ -45,7 +45,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Upd
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalAccrualType == null)
-                throw new NullReferenceException(nameof(request.AdditionalAccrualType));
+                throw new InvalidOperationException("request.AdditionalAccrualType is null");
 
             await CheckUpdateListAdditionalAccrualTypeDtoAsync(request.AdditionalAccrualType, cancellationToken);
 
@@ -73,7 +73,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Upd
                 .Where(rec => rec.Code == additionalAccrualType.Code || rec.Id == additionalAccrualType.Id)
                 .ToListAsync(cancellationToken);
 
-            if (additionalAccrualTypes.Any(rec => rec.Id == additionalAccrualType.Id) == false)
+            if (!additionalAccrualTypes.Any(rec => rec.Id == additionalAccrualType.Id))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній тип додаткових нарахувань в базі (id: {additionalAccrualType.Id})");
 

@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Commands.DeleteL
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.SpecialSeniority == null)
-                throw new NullReferenceException(nameof(request.SpecialSeniority));
+                throw new InvalidOperationException("request.SpecialSeniority is null");
 
             var specialSeniority =
                 await GetListSpecialSeniorityAsync(request.SpecialSeniority.Id, cancellationToken);

@@ -44,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.UpdateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.GradeAllowance == null) throw new NullReferenceException(nameof(request.GradeAllowance));
+            if (request.GradeAllowance == null) throw new InvalidOperationException("request.GradeAllowance is null");
 
             await CheckUpdateListGradeAllowanceDtoAsync(request.GradeAllowance, cancellationToken);
 
@@ -74,7 +74,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.UpdateList
                 .Where(rec => rec.Code == gradeAllowance.Code || rec.Id == gradeAllowance.Id)
                 .ToListAsync(cancellationToken);
 
-            if (gradeAllowances.Any(rec => rec.Id == gradeAllowance.Id) == false)
+            if (!gradeAllowances.Any(rec => rec.Id == gradeAllowance.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутня надбавка за класність в базі (id: {gradeAllowance.Id})");
 
             if (gradeAllowances.Any(rec => rec.Id != gradeAllowance.Id))

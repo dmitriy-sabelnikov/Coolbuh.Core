@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Extensions
         /// <returns>Прожиточные минимумы</returns>
         public static ListLivingWage MapListLivingWage(this CreateListLivingWageDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListLivingWage
             {
@@ -34,7 +34,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Extensions
         /// <returns>Прожиточные минимумы</returns>
         public static ListLivingWage MapListLivingWage(this UpdateListLivingWageDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListLivingWage
             {
@@ -52,7 +52,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Extensions
         /// <returns>DTO "Прожиточный минимум"</returns>
         public static ListLivingWageDto MapListLivingWageDto(this ListLivingWage livingWage)
         {
-            if (livingWage == null) throw new NullReferenceException(nameof(livingWage));
+            if (livingWage == null) throw new ArgumentNullException(nameof(livingWage));
 
             return new ListLivingWageDto
             {

@@ -42,7 +42,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Commands.CreateEmployeeCa
         public async Task<EmployeeCardDto> Handle(CreateEmployeeCardRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.EmployeeCard == null) throw new NullReferenceException(nameof(request.EmployeeCard));
+            if (request.EmployeeCard == null) throw new InvalidOperationException("request.EmployeeCard is null");
 
             await CheckCreateEmployeeCardDtoAsync(request.EmployeeCard, cancellationToken);
 
@@ -64,7 +64,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Commands.CreateEmployeeCa
         /// <returns></returns>
         private async Task CheckCreateEmployeeCardDtoAsync(CreateEmployeeCardDto employeeCard, CancellationToken cancellationToken)
         {
-            if (employeeCard == null) throw new NullReferenceException(nameof(employeeCard));
+            if (employeeCard == null) throw new ArgumentNullException(nameof(employeeCard));
 
             if (await _dbContext.EmployeeCards
                 .AnyAsync(rec => rec.TaxIdentificationNumber == employeeCard.TaxIdentificationNumber, cancellationToken))

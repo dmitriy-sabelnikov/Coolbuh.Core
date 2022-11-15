@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Coolbuh.Core.WebCore
 {
@@ -54,10 +55,20 @@ namespace Coolbuh.Core.WebCore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                var urls = Configuration[WebHostDefaults.ServerUrlsKey];
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Url listener:     ");
+                Console.ResetColor();
+                Console.WriteLine(urls);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Swagger listener: ");
+                Console.ResetColor();
+                Console.WriteLine(urls + "/swagger/index.html");
+                Console.WriteLine(new string('=', 100));
             }
 
             //app.UsePerfomanceMiddleware();
-
             app.UseHttpsRedirection();
 
             app.UseSwagger();

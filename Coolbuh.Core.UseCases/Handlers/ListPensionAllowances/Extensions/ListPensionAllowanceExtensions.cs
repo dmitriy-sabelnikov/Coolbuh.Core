@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
         /// <returns>Надбавка за пенсию</returns>
         public static ListPensionAllowance MapListPensionAllowance(this CreateListPensionAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListPensionAllowance
             {
@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
         /// <returns>Надбавка за пенсию</returns>
         public static ListPensionAllowance MapListPensionAllowance(this UpdateListPensionAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListPensionAllowance
             {
@@ -55,7 +55,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
         /// <returns>DTO "Надбавки за пенсию"</returns>
         public static ListPensionAllowanceDto MapListPensionAllowanceDto(this ListPensionAllowance pensionAllowance)
         {
-            if (pensionAllowance == null) throw new NullReferenceException(nameof(pensionAllowance));
+            if (pensionAllowance == null) throw new ArgumentNullException(nameof(pensionAllowance));
 
             return new ListPensionAllowanceDto
             {
@@ -63,7 +63,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
                 Code = pensionAllowance.Code,
                 Name = pensionAllowance.Name,
                 Percent = pensionAllowance.Percent,
-                UseAllowance = (pensionAllowance.Flags & (int)ListPensionAllowanceFlags.NoUse) <= 0
+                UseAllowance = (pensionAllowance.Flags & (int)ListPensionAllowanceActions.NoUse) <= 0
             };
         }
 
@@ -81,7 +81,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
                 Code = pensionAllowance.Code,
                 Name = pensionAllowance.Name,
                 Percent = pensionAllowance.Percent,
-                UseAllowance = (pensionAllowance.Flags & (int)ListPensionAllowanceFlags.NoUse) <= 0
+                UseAllowance = (pensionAllowance.Flags & (int)ListPensionAllowanceActions.NoUse) <= 0
             });
         }
 
@@ -94,7 +94,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Extensions
         {
             var flags = 0;
             if (!useAllowance)
-                flags += (int)ListPensionAllowanceFlags.NoUse;
+                flags += (int)ListPensionAllowanceActions.NoUse;
 
             return flags;
         }

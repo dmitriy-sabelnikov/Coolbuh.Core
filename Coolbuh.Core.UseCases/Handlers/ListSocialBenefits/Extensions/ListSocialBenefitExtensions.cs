@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Extensions
         /// <returns>Социальная льгота</returns>
         public static ListSocialBenefit MapListSocialBenefit(this CreateListSocialBenefitDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListSocialBenefit
             {
@@ -35,7 +35,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Extensions
         /// <returns>Социальная льгота</returns>
         public static ListSocialBenefit MapListSocialBenefit(this UpdateListSocialBenefitDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListSocialBenefit
             {
@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Extensions
         /// <returns>DTO "Социальная льгота"</returns>
         public static ListSocialBenefitDto MapListSocialBenefitDto(this ListSocialBenefit socialBenefit)
         {
-            if (socialBenefit == null) throw new NullReferenceException(nameof(socialBenefit));
+            if (socialBenefit == null) throw new ArgumentNullException(nameof(socialBenefit));
 
             return new ListSocialBenefitDto
             {

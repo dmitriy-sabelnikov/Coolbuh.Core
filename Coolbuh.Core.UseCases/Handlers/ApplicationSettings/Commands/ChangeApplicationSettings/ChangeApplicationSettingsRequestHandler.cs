@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ApplicationSettings.Commands.ChangeAppl
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.ApplicationSetting == null)
-                throw new NullReferenceException(nameof(request.ApplicationSetting));
+                throw new InvalidOperationException("request.ApplicationSetting is null");
 
             var applicationSettings =
                 await _dbContext.ApplicationSettings.AsNoTracking().ToListAsync(cancellationToken);

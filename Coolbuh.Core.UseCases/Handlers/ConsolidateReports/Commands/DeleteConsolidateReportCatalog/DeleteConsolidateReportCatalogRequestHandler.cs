@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Commands.DeleteConso
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.ConsolidateReportCatalog == null)
-                throw new NullReferenceException(nameof(request.ConsolidateReportCatalog));
+                throw new InvalidOperationException("request.ConsolidateReportCatalog is null");
 
             var consolidateReportCatalog =
                 await GetConsolidateReportCatalogAsync(request.ConsolidateReportCatalog.Id, cancellationToken);

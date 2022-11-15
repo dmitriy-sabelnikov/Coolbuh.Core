@@ -41,7 +41,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.CreateListDepa
         public async Task<ListDepartmentDto> Handle(CreateListDepartmentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Department == null) throw new NullReferenceException(nameof(request.Department));
+            if (request.Department == null) 
+                throw new InvalidOperationException("request.Department is null");
 
             await CheckListDepartmentAsync(request.Department, cancellationToken);
 

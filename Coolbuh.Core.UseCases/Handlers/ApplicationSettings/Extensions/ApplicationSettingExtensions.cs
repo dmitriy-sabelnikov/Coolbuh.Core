@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ApplicationSettings.Extensions
         /// <returns>Список "Параметры приложения"</returns>
         public static List<ApplicationSetting> MapApplicationSettings(this ChangeApplicationSettingDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             var result = new List<ApplicationSetting>();
 
@@ -58,7 +58,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ApplicationSettings.Extensions
         public static ApplicationSettingDto MapApplicationSettingDto(
             this List<ApplicationSetting> applicationSettings)
         {
-            if (applicationSettings == null) throw new NullReferenceException(nameof(applicationSettings));
+            if (applicationSettings == null) throw new ArgumentNullException(nameof(applicationSettings));
 
             var applicationSettingsDto = new ApplicationSettingDto();
             foreach (var setting in applicationSettings)

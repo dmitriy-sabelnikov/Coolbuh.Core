@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.CreatePayment
         public async Task<PaymentDto> Handle(CreatePaymentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Payment == null) throw new NullReferenceException(nameof(request.Payment));
+            if (request.Payment == null) throw new InvalidOperationException("request.Payment is null");
 
             await CheckCreatePaymentDtoAsync(request.Payment, cancellationToken);
 
@@ -63,8 +63,8 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.CreatePayment
         {
             if (payment == null) throw new ArgumentNullException(nameof(payment));
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == payment.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == payment.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з {payment.EmployeeCardId}");
         }
     }

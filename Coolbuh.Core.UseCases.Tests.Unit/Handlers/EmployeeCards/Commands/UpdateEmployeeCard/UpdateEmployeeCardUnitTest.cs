@@ -26,8 +26,18 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.EmployeeCards.Commands.Updat
             _fakeDbContext = FakeDbRepository.GetFakeDbContext();
 
             var fakeEmployeeCards = FakeDbRepository.GetFakeEmployeeCards();
+            var fakeEmployeeCardStatuses = FakeDbRepository.GetFakeEmployeeCardStatuses();
+            var fakeEmployeeChildren = FakeDbRepository.GetFakeEmployeeChildren();
+            var fakeEmployeeDisabilities = FakeDbRepository.GetFakeEmployeeDisabilities();
+            var fakeEmployeeSpecialSeniorities = FakeDbRepository.GetFakeEmployeeSpecialSeniorities();
+            var fakeEmployeeTaxReliefs = FakeDbRepository.GetFakeEmployeeTaxReliefs();
 
             _fakeDbContext.Setup(set => set.EmployeeCards).Returns(fakeEmployeeCards.Object);
+            _fakeDbContext.Setup(set => set.EmployeeCardStatuses).Returns(fakeEmployeeCardStatuses.Object);
+            _fakeDbContext.Setup(set => set.EmployeeChildren).Returns(fakeEmployeeChildren.Object);
+            _fakeDbContext.Setup(set => set.EmployeeDisabilities).Returns(fakeEmployeeDisabilities.Object);
+            _fakeDbContext.Setup(set => set.EmployeeSpecialSeniorities).Returns(fakeEmployeeSpecialSeniorities.Object);
+            _fakeDbContext.Setup(set => set.EmployeeTaxReliefs).Returns(fakeEmployeeTaxReliefs.Object);
         }
 
         /// <summary>
@@ -52,6 +62,7 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.EmployeeCards.Commands.Updat
 
             // Assert
             _fakeDbContext.Verify(rec => rec.EmployeeCards.Update(It.IsAny<EmployeeCard>()), Times.Once());
+            _fakeDbContext.Verify(rec => rec.EmployeeCardStatuses.RemoveRange(It.IsAny<List<EmployeeCardStatus>>()), Times.Once());
             _fakeDbContext.Verify(rec => rec.SaveChangesAsync(CancellationToken.None), Times.Once());
 
             Assert.NotNull(result);

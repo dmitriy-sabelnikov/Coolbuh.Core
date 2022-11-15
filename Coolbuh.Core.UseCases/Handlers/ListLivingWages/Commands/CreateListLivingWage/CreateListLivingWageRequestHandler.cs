@@ -41,7 +41,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Commands.CreateListLivi
         public async Task<ListLivingWageDto> Handle(CreateListLivingWageRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.LivingWage == null) throw new NullReferenceException(nameof(request.LivingWage));
+            if (request.LivingWage == null) throw new InvalidOperationException("request.LivingWage is null");
 
             var livingWage = request.LivingWage.MapListLivingWage();
             _livingWagesService.ValidationEntity(livingWage);

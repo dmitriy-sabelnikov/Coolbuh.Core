@@ -1,9 +1,12 @@
-﻿namespace Coolbuh.Core.Entities.Enums
+﻿using System;
+
+namespace Coolbuh.Core.Entities.Enums
 {
     /// <summary>
     /// Флаги справочника "Типы дополнительных начислений"
     /// </summary>
-    public enum ListAdditionalAccrualTypeFlags
+    [Flags]
+    public enum ListAdditionalAccrualTypeActions
     {
         /// <summary>
         /// Включать в расчет

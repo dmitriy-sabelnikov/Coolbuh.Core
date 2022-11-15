@@ -47,15 +47,5 @@ namespace Coolbuh.Core.DomainServices.Interfaces
         /// <returns>Итоговая сумма зарплаты</returns>
         decimal CalculateSalaryResultSum(decimal sum, decimal pensionAllowanceSum,
             decimal gradeAllowanceSum, decimal otherAllowanceSum);
-
-        ///// <summary>
-        ///// Расчет заработной платы
-        ///// </summary>
-        ///// <param name="salary">Заработная плата</param>
-        ///// <param name="pensionAllowance">Надбавка за пенсию</param>
-        ///// <param name="gradeAllowance">Надбавка за классность</param>
-        ///// <param name="otherAllowance">Другая надбавка</param>
-        //public void Calculate(Salary salary, ListPensionAllowance pensionAllowance, ListGradeAllowance gradeAllowance,
-        //    ListOtherAllowance otherAllowance);
     }
 }

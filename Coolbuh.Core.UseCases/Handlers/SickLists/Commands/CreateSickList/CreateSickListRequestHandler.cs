@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.CreateSickList
         public async Task<SickListDto> Handle(CreateSickListRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SickList == null) throw new NullReferenceException(nameof(request.SickList));
+            if (request.SickList == null) throw new InvalidOperationException("request.SickList is null");
 
             await CheckCreateSickListDtoAsync(request.SickList, cancellationToken);
 
@@ -62,12 +62,12 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.CreateSickList
         {
             if (sickList == null) throw new ArgumentNullException(nameof(sickList));
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == sickList.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == sickList.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з {sickList.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == sickList.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == sickList.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі з {sickList.DepartmentId}");
         }
     }

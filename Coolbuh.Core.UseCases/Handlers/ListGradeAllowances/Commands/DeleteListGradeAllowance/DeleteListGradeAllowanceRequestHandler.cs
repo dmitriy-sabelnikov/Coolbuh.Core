@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.DeleteList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.GradeAllowance == null) throw new NullReferenceException(nameof(request.GradeAllowance));
+            if (request.GradeAllowance == null) throw new InvalidOperationException("request.GradeAllowance is null");
 
             var gradeAllowance = await GetListGradeAllowanceAsync(request.GradeAllowance.Id, cancellationToken);
 

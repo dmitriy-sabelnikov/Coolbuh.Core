@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Commands.CreateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.OtherAllowance == null) throw new NullReferenceException(nameof(request.OtherAllowance));
+            if (request.OtherAllowance == null) throw new InvalidOperationException("request.OtherAllowance is null");
 
             await CheckCreateListOtherAllowanceDtoAsync(request.OtherAllowance, cancellationToken);
 

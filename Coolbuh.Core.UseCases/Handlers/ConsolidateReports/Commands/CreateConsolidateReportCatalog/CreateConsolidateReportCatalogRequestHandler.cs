@@ -1,4 +1,5 @@
 ﻿using Coolbuh.Core.DomainServices.Interfaces;
+using Coolbuh.Core.Entities.Models;
 using Coolbuh.Core.Infrastructure.Interfaces.DataAccess;
 using Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Dto;
 using Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions;
@@ -42,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Commands.CreateConso
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.ConsolidateReportCatalog == null)
-                throw new NullReferenceException(nameof(request.ConsolidateReportCatalog));
+                throw new InvalidOperationException("request.ConsolidateReportCatalog is null");
 
             var consolidateReportCatalog = request.ConsolidateReportCatalog.MapConsolidateReportCatalog();
 

@@ -43,13 +43,13 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Commands.UpdateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.MinimumSalary == null) throw new NullReferenceException(nameof(request.MinimumSalary));
+            if (request.MinimumSalary == null) throw new InvalidOperationException("request.MinimumSalary is null");
 
 
             var minimumSalary = request.MinimumSalary.MapListMinimumSalary();
             var minimumSalaries = await _dbContext.ListMinimumSalaries.AsNoTracking().ToListAsync(cancellationToken);
 
-            if (minimumSalaries.Any(rec => rec.Id == minimumSalary.Id) == false)
+            if (!minimumSalaries.Any(rec => rec.Id == minimumSalary.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутня мінімальна зарплата в базі (id: {minimumSalary.Id})");
 
             _minimumSalaryService.ValidationEntity(minimumSalary);

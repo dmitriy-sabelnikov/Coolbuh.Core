@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.DeleteSickList
         public async Task<SickListDto> Handle(DeleteSickListRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SickList == null) throw new NullReferenceException(nameof(request.SickList));
+            if (request.SickList == null) throw new InvalidOperationException("request.SickList is null");
 
             var sickList = await GetSickListAsync(request.SickList.Id, cancellationToken);
 

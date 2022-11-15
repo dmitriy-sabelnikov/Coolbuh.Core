@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.DeletePayment
         public async Task<PaymentDto> Handle(DeletePaymentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Payment == null) throw new NullReferenceException(nameof(request.Payment));
+            if (request.Payment == null) throw new InvalidOperationException("request.Payment is null");
 
             var payment = await GetPaymentAsync(request.Payment.Id, cancellationToken);
 

@@ -1,9 +1,12 @@
-﻿namespace Coolbuh.Core.Entities.Enums
+﻿using System;
+
+namespace Coolbuh.Core.Entities.Enums
 {
     /// <summary>
     /// Флаги справочника "Надбавки за классность"
     /// </summary>
-    public enum ListGradeAllowanceFlags
+    [Flags]
+    public enum ListGradeAllowanceActions
     {
         /// <summary>
         /// Не использовать надбавку

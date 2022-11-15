@@ -55,7 +55,6 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.AdditionalPayments.Commands.
         /// </summary>
         /// <param name="additionalPayment">Дополнительная выплата</param>
         /// <returns>DTO удаления "Дополнительная выплата"</returns>
-        /// <exception cref="NullReferenceException"></exception>
         private static DeleteAdditionalPaymentDto GetFakeDeleteAdditionalPaymentDto()
         {
             return new DeleteAdditionalPaymentDto

@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Commands.DeleteAddit
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.AdditionalPayment == null) throw new NullReferenceException(nameof(request.AdditionalPayment));
+            if (request.AdditionalPayment == null) throw new InvalidOperationException("request.AdditionalPayment is null");
 
             var additionalPayment =
                 await GetAdditionalPaymentAsync(request.AdditionalPayment.Id, cancellationToken);

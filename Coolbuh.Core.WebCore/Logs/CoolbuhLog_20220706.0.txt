@@ -1,5 +1,0 @@
-2022-07-06 13:46:56.117 +03:00 [Information] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:7001
-2022-07-06 13:46:56.128 +03:00 [Information] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:7000
-2022-07-06 13:46:56.133 +03:00 [Information] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
-2022-07-06 13:46:56.136 +03:00 [Information] Microsoft.Hosting.Lifetime: Hosting environment: Development
-2022-07-06 13:46:56.137 +03:00 [Information] Microsoft.Hosting.Lifetime: Content root path: E:\Coolbuh3.0\Coolbuh.Core\Coolbuh.Core.WebCore

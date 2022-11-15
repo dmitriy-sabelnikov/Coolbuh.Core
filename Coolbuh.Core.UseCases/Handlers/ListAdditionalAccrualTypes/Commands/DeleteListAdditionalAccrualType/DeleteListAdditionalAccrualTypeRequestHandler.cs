@@ -40,7 +40,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Del
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalAccrualType == null)
-                throw new NullReferenceException(nameof(request.AdditionalAccrualType));
+                throw new InvalidOperationException("request.AdditionalAccrualType is null");
 
             var additionalAccrualType =
                 await GetListAdditionalAccrualTypeAsync(request.AdditionalAccrualType.Id,

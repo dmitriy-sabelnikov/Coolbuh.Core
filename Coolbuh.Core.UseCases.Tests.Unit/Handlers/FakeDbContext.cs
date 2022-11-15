@@ -144,11 +144,11 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
             return civilLawContracts.AsQueryable().BuildMockDbSet();
         }
 
-        public static Mock<DbSet<ConsolidateReportCatalog>> GetFakeConsolidateReportCatalogs()
+        public static Mock<DbSet<Entities.Models.ConsolidateReportCatalog>> GetFakeConsolidateReportCatalogs()
         {
-            var consolidateReportCatalogs = new List<ConsolidateReportCatalog>
+            var consolidateReportCatalogs = new List<Entities.Models.ConsolidateReportCatalog>
             {
-                new ConsolidateReportCatalog
+                new Entities.Models.ConsolidateReportCatalog
                 {
                     Id = 1,
                     Name = "Test",
@@ -158,7 +158,7 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
                     CalculateDate = new DateTime(2022, 05, 01),
                     Flags = 0
                 },
-                new ConsolidateReportCatalog
+                new Entities.Models.ConsolidateReportCatalog
                 {
                     Id = 2,
                     Name = "Test",
@@ -222,6 +222,85 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
             return employeeCards.AsQueryable().BuildMockDbSet();
         }
 
+        public static Mock<DbSet<EmployeeCardStatus>> GetFakeEmployeeCardStatuses()
+        {
+            var cardStatuses = new List<EmployeeCardStatus>
+            {
+                new EmployeeCardStatus
+                {
+                    Id = 1,
+                    EmployeeCardId = 1,
+                    CardStatusTypeId = 1,
+                    PeriodBegin = new DateTime(2022, 10, 1)
+                }
+            };
+
+            return cardStatuses.AsQueryable().BuildMockDbSet();
+        }
+
+        public static Mock<DbSet<EmployeeChildren>> GetFakeEmployeeChildren()
+        {
+            var children = new List<EmployeeChildren>()
+            {
+                new EmployeeChildren()
+                {
+                    Id = 1,
+                    EmployeeCardId = 1,
+                    Number= 1,
+                    PeriodBegin = new DateTime(2022, 10, 1)
+                }
+            };
+
+             return children.AsQueryable().BuildMockDbSet();
+        }
+
+        public static Mock<DbSet<EmployeeDisability>> GetFakeEmployeeDisabilities()
+        {
+            var disabilities = new List<EmployeeDisability>()
+            {
+                new EmployeeDisability
+                {
+                    Id = 1,
+                    EmployeeCardId = 1,
+                    Type = 1,
+                    PeriodBegin = new DateTime(2022, 10, 1)
+                }
+            };
+
+            return disabilities.AsQueryable().BuildMockDbSet();
+        }
+
+        public static Mock<DbSet<EmployeeSpecialSeniority>> GetFakeEmployeeSpecialSeniorities()
+        {
+            var specialSeniorities = new List<EmployeeSpecialSeniority>()
+            {
+                new EmployeeSpecialSeniority()
+                {
+                    Id = 1,
+                    EmployeeCardId = 1,
+                    SpecialSeniorityId = 1,
+                    PeriodBegin = new DateTime(2022, 10, 1)
+                }
+            };
+
+            return specialSeniorities.AsQueryable().BuildMockDbSet();
+        }
+        public static Mock<DbSet<EmployeeTaxRelief>> GetFakeEmployeeTaxReliefs()
+        {
+            var taxReliefs = new List<EmployeeTaxRelief>()
+            {
+                new EmployeeTaxRelief()
+                {
+                    Id = 1,
+                    EmployeeCardId= 1,
+                    Сoefficient = 1,
+                    PeriodBegin = new DateTime(2022, 10, 1)
+                }
+            };
+
+            return taxReliefs.AsQueryable().BuildMockDbSet();
+        }
+
         public static Mock<DbSet<ListAdditionalAccrualType>> GetFakeListAdditionalAccrualTypes()
         {
             var additionalAccrualTypes = new List<ListAdditionalAccrualType>()
@@ -231,14 +310,14 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers
                     Id = 1,
                     Code = "1",
                     Name = "премiя",
-                    Flags = (int)ListAdditionalAccrualTypeFlags.Calculate
+                    Flags = (int)ListAdditionalAccrualTypeActions.Calculate
                 },
                 new ListAdditionalAccrualType
                 {
                     Id = 2,
                     Code = "2",
                     Name = "алiменти",
-                    Flags = (int)ListAdditionalAccrualTypeFlags.Calculate
+                    Flags = (int)ListAdditionalAccrualTypeActions.Calculate
                 }
             };
 

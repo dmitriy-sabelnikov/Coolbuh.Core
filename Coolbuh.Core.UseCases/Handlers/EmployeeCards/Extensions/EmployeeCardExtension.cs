@@ -23,53 +23,27 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>Карточка работника</returns>
         public static EmployeeCard MapEmployeeCard(this CreateEmployeeCardDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
-            List<EmployeeChildren> employeeChildren = null;
-            List<EmployeeTaxRelief> employeeTaxReliefs = null;
-            List<EmployeeCardStatus> employeeCardStatuses = null;
-            List<EmployeeDisability> employeeDisabilities = null;
-            List<EmployeeSpecialSeniority> employeeSpecialSeniorities = null;
+            List<EmployeeChildren> employeeChildren = dto.EmployeeChildren != null 
+                ? dto.EmployeeChildren.MapEmployeeChildren()
+                : null;
 
-            if (dto.EmployeeChildren != null)
-            {
-                employeeChildren = new List<EmployeeChildren>();
+            List<EmployeeTaxRelief> employeeTaxReliefs = dto.EmployeeTaxReliefs != null
+                ? dto.EmployeeTaxReliefs.MapEmployeeTaxRelief()
+                : null; 
 
-                foreach (var children in dto.EmployeeChildren)
-                    employeeChildren.Add(children.MapEmployeeChildren());
-            }
+            List<EmployeeCardStatus> employeeCardStatuses = dto.EmployeeCardStatuses != null
+                ? dto.EmployeeCardStatuses.MapEmployeeCardStatus() 
+                : null;
 
-            if (dto.EmployeeTaxReliefs != null)
-            {
-                employeeTaxReliefs = new List<EmployeeTaxRelief>();
+            List<EmployeeDisability> employeeDisabilities = dto.EmployeeDisabilities != null
+                ? dto.EmployeeDisabilities.MapEmployeeDisability()
+                : null;
 
-                foreach (var taxRelief in dto.EmployeeTaxReliefs)
-                    employeeTaxReliefs.Add(taxRelief.MapEmployeeTaxRelief());
-            }
-
-            if (dto.EmployeeCardStatuses != null)
-            {
-                employeeCardStatuses = new List<EmployeeCardStatus>();
-
-                foreach (var cardStatus in dto.EmployeeCardStatuses)
-                    employeeCardStatuses.Add(cardStatus.MapEmployeeCardStatus());
-            }
-
-            if (dto.EmployeeDisabilities != null)
-            {
-                employeeDisabilities = new List<EmployeeDisability>();
-
-                foreach (var disability in dto.EmployeeDisabilities)
-                    employeeDisabilities.Add(disability.MapEmployeeDisability());
-            }
-
-            if (dto.EmployeeSpecialSeniorities != null)
-            {
-                employeeSpecialSeniorities = new List<EmployeeSpecialSeniority>();
-
-                foreach (var specialSeniority in dto.EmployeeSpecialSeniorities)
-                    employeeSpecialSeniorities.Add(specialSeniority.MapEmployeeSpecialSeniority());
-            }
+            List<EmployeeSpecialSeniority> employeeSpecialSeniorities = dto.EmployeeSpecialSeniorities != null
+                ? dto.EmployeeSpecialSeniorities.MapEmployeeSpecialSeniority()
+                : null;
 
             return new EmployeeCard
             {
@@ -99,53 +73,25 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>Карточка работника</returns>
         public static EmployeeCard MapEmployeeCard(this UpdateEmployeeCardDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
-            List<EmployeeChildren> employeeChildren = null;
-            List<EmployeeTaxRelief> employeeTaxReliefs = null;
-            List<EmployeeCardStatus> employeeCardStatuses = null;
-            List<EmployeeDisability> employeeDisabilities = null;
-            List<EmployeeSpecialSeniority> employeeSpecialSeniorities = null;
+            List<EmployeeChildren> employeeChildren = dto.EmployeeChildren != null 
+                ? dto.EmployeeChildren.MapEmployeeChildren(dto.Id) : null;
 
-            if (dto.EmployeeChildren != null)
-            {
-                employeeChildren = new List<EmployeeChildren>();
+            List<EmployeeTaxRelief> employeeTaxReliefs = dto.EmployeeTaxReliefs != null
+                ? dto.EmployeeTaxReliefs.MapEmployeeTaxRelief(dto.Id) : null;
 
-                foreach (var children in dto.EmployeeChildren)
-                    employeeChildren.Add(children.MapEmployeeChildren());
-            }
+            List<EmployeeCardStatus> employeeCardStatuses = dto.EmployeeCardStatuses != null
+                ? dto.EmployeeCardStatuses.MapEmployeeCardStatus(dto.Id)
+                : null;
+            
+            List<EmployeeDisability> employeeDisabilities = dto.EmployeeDisabilities != null
+                ? dto.EmployeeDisabilities.MapEmployeeDisability(dto.Id)
+                : null;
 
-            if (dto.EmployeeTaxReliefs != null)
-            {
-                employeeTaxReliefs = new List<EmployeeTaxRelief>();
-
-                foreach (var taxRelief in dto.EmployeeTaxReliefs)
-                    employeeTaxReliefs.Add(taxRelief.MapEmployeeTaxRelief());
-            }
-
-            if (dto.EmployeeCardStatuses != null)
-            {
-                employeeCardStatuses = new List<EmployeeCardStatus>();
-
-                foreach (var cardStatus in dto.EmployeeCardStatuses)
-                    employeeCardStatuses.Add(cardStatus.MapEmployeeCardStatus());
-            }
-
-            if (dto.EmployeeDisabilities != null)
-            {
-                employeeDisabilities = new List<EmployeeDisability>();
-
-                foreach (var disability in dto.EmployeeDisabilities)
-                    employeeDisabilities.Add(disability.MapEmployeeDisability());
-            }
-
-            if (dto.EmployeeSpecialSeniorities != null)
-            {
-                employeeSpecialSeniorities = new List<EmployeeSpecialSeniority>();
-
-                foreach (var specialSeniority in dto.EmployeeSpecialSeniorities)
-                    employeeSpecialSeniorities.Add(specialSeniority.MapEmployeeSpecialSeniority());
-            }
+            List<EmployeeSpecialSeniority> employeeSpecialSeniorities = dto.EmployeeSpecialSeniorities != null
+                ? dto.EmployeeSpecialSeniorities.MapEmployeeSpecialSeniority(dto.Id)
+                : null;
 
             return new EmployeeCard
             {
@@ -170,16 +116,16 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
-        /// Маппинг детей работника 
+        /// Маппинг ребенка работника 
         /// </summary>
         /// <param name="dto">DTO создания "Дети"</param>
-        /// <returns>Дети работника</returns>
+        /// <returns>Ребенок работника</returns>
         public static EmployeeChildren MapEmployeeChildren(this CreateEmployeeChildrenDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeChildren
-            {
+            { 
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 Number = dto.Number
@@ -189,15 +135,35 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <summary>
         /// Маппинг детей работника 
         /// </summary>
-        /// <param name="dto">DTO обновления "Дети"</param>
-        /// <returns>Дети работника</returns>
-        public static EmployeeChildren MapEmployeeChildren(this UpdateEmployeeChildrenDto dto)
+        /// <param name="dtos">Список DTO обновления "Дети"</param>
+        /// <returns>Список детей работника</returns>
+        public static List<EmployeeChildren> MapEmployeeChildren(this List<CreateEmployeeChildrenDto> dtos)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var children = new List<EmployeeChildren>();
+
+            foreach (var dto in dtos)
+                children.Add(dto.MapEmployeeChildren());
+
+            return children;
+        }
+
+        /// <summary>
+        /// Маппинг ребенка работника 
+        /// </summary>
+        /// <param name="dto">DTO обновления "Дети"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param> 
+        /// <returns>Ребенок работника</returns>
+        public static EmployeeChildren MapEmployeeChildren(this UpdateEmployeeChildrenDto dto, int employeeCardId)
+        {
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeChildren
             {
                 Id = dto.Id,
+                EmployeeCardId = employeeCardId,
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 Number = dto.Number
@@ -207,19 +173,56 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <summary>
         /// Маппинг детей работника 
         /// </summary>
-        /// <param name="children">Дети работника</param>
-        /// <returns>DTO "Дети"</returns>
-        public static EmployeeChildrenDto MapEmployeeChildren(this EmployeeChildren children)
+        /// <param name="dtos">Список DTO обновления "Дети"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param> 
+        /// <returns>Список детей работника</returns>
+        public static List<EmployeeChildren> MapEmployeeChildren(this List<UpdateEmployeeChildrenDto> dtos, int employeeCardId)
         {
-            if (children == null) throw new NullReferenceException(nameof(children));
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var children = new List<EmployeeChildren>();
+
+            foreach (var dto in dtos)
+                children.Add(dto.MapEmployeeChildren(employeeCardId));
+
+            return children;
+        }
+
+        /// <summary>
+        /// Маппинг ребенка работника 
+        /// </summary>
+        /// <param name="child">Ребенок работника</param>
+        /// <returns>DTO "Дети"</returns>
+        public static EmployeeChildrenDto MapEmployeeChildren(this EmployeeChildren child)
+        {
+            if (child == null) throw new ArgumentNullException(nameof(child));
 
             return new EmployeeChildrenDto
             {
-                Id = children.Id,
-                PeriodBegin = children.PeriodBegin,
-                PeriodEnd = children.PeriodEnd,
-                Number = children.Number
+                Id = child.Id,
+                PeriodBegin = child.PeriodBegin,
+                PeriodEnd = child.PeriodEnd,
+                Number = child.Number
             };
+        }
+
+        /// <summary>
+        /// Маппинг детей работника 
+        /// </summary>
+        /// <param name="children">Список детей работника</param>
+        /// <returns>Список DTO "Дети"</returns>
+        public static List<EmployeeChildrenDto> MapEmployeeChildren(this List<EmployeeChildren> children)
+        {
+            if (children == null)
+                throw new ArgumentNullException(nameof(children));
+
+            var dtos = new List<EmployeeChildrenDto>();
+
+            foreach (var child in children)
+                dtos.Add(child.MapEmployeeChildren());
+
+            return dtos;
         }
 
         /// <summary>
@@ -229,7 +232,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>Налоговая льгота</returns>
         public static EmployeeTaxRelief MapEmployeeTaxRelief(this CreateEmployeeTaxReliefDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeTaxRelief
             {
@@ -240,21 +243,60 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг налоговых льгот работника 
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Налоговые льготы"</param>
+        /// <returns>Список налоговых льгот</returns>
+        public static List<EmployeeTaxRelief> MapEmployeeTaxRelief(this List<CreateEmployeeTaxReliefDto> dtos)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var taxReliefs = new List<EmployeeTaxRelief>();
+
+            foreach (var dto in dtos)
+                taxReliefs.Add(dto.MapEmployeeTaxRelief());
+
+            return taxReliefs;
+        }
+
+        /// <summary>
         /// Маппинг налоговой льготы
         /// </summary>
         /// <param name="dto">DTO обновления "Налоговая льгота"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param>
         /// <returns>Налоговая льгота</returns>
-        public static EmployeeTaxRelief MapEmployeeTaxRelief(this UpdateEmployeeTaxReliefDto dto)
+        public static EmployeeTaxRelief MapEmployeeTaxRelief(this UpdateEmployeeTaxReliefDto dto, int employeeCardId)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeTaxRelief
             {
                 Id = dto.Id,
+                EmployeeCardId = employeeCardId,
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 Сoefficient = dto.Сoefficient
             };
+        }
+
+        /// <summary>
+        /// Маппинг налоговых льгот работника 
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Налоговые льготы"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param>
+        /// <returns>Список налоговых льгот</returns>
+        public static List<EmployeeTaxRelief> MapEmployeeTaxRelief(this List<UpdateEmployeeTaxReliefDto> dtos, int employeeCardId)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var taxReliefs = new List<EmployeeTaxRelief>();
+
+            foreach (var dto in dtos)
+                taxReliefs.Add(dto.MapEmployeeTaxRelief(employeeCardId));
+
+            return taxReliefs;
         }
 
         /// <summary>
@@ -264,7 +306,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>DTO "Налоговая льгота"</returns>
         public static EmployeeTaxReliefDto MapEmployeeTaxRelief(this EmployeeTaxRelief taxRelief)
         {
-            if (taxRelief == null) throw new NullReferenceException(nameof(taxRelief));
+            if (taxRelief == null) throw new ArgumentNullException(nameof(taxRelief));
 
             return new EmployeeTaxReliefDto
             {
@@ -276,13 +318,31 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг налоговых льгот
+        /// </summary>
+        /// <param name="taxReliefs">Список налоговых льгот</param>
+        /// <returns>Список DTO "Налоговая льгота"</returns>
+        public static List<EmployeeTaxReliefDto> MapEmployeeTaxRelief(this List<EmployeeTaxRelief> taxReliefs)
+        {
+            if (taxReliefs == null)
+                throw new ArgumentNullException(nameof(taxReliefs));
+
+            var dtos = new List<EmployeeTaxReliefDto>();
+
+            foreach (var taxRelief in taxReliefs)
+                dtos.Add(taxRelief.MapEmployeeTaxRelief());
+
+            return dtos;
+        }
+
+        /// <summary>
         /// Маппинг статуса работника
         /// </summary>
         /// <param name="dto">DTO создания "Статус"</param>
         /// <returns>Статус работника</returns>
         public static EmployeeCardStatus MapEmployeeCardStatus(this CreateEmployeeCardStatusDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeCardStatus
             {
@@ -293,21 +353,60 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг статусов работника
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Статус"</param>
+        /// <returns>Список статусов работника</returns>
+        public static List<EmployeeCardStatus> MapEmployeeCardStatus(this List<CreateEmployeeCardStatusDto> dtos)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var cardStatuses = new List<EmployeeCardStatus>();
+
+            foreach (var dto in dtos)
+                cardStatuses.Add(dto.MapEmployeeCardStatus());
+
+            return cardStatuses;
+        }
+
+        /// <summary>
         /// Маппинг статуса работника
         /// </summary>
         /// <param name="dto">DTO обновления "Статус"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param>
         /// <returns>Статус работника</returns>
-        public static EmployeeCardStatus MapEmployeeCardStatus(this UpdateEmployeeCardStatusDto dto)
+        public static EmployeeCardStatus MapEmployeeCardStatus(this UpdateEmployeeCardStatusDto dto, int employeeCardId)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeCardStatus
             {
                 Id = dto.Id,
+                EmployeeCardId = employeeCardId,
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 CardStatusTypeId = dto.CardStatusTypeId
             };
+        }
+
+        /// <summary>
+        /// Маппинг статусов работника
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Статус"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param>
+        /// <returns>Список статусов работника</returns>
+        public static List<EmployeeCardStatus> MapEmployeeCardStatus(this List<UpdateEmployeeCardStatusDto> dtos, int employeeCardId)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var cardStatuses = new List<EmployeeCardStatus>();
+
+            foreach (var dto in dtos)
+                cardStatuses.Add(dto.MapEmployeeCardStatus(employeeCardId));
+
+            return cardStatuses;
         }
 
         /// <summary>
@@ -317,7 +416,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>DTO "Статус"</returns>
         public static EmployeeCardStatusDto MapEmployeeCardStatus(this EmployeeCardStatus cardStatus)
         {
-            if (cardStatus == null) throw new NullReferenceException(nameof(cardStatus));
+            if (cardStatus == null) throw new ArgumentNullException(nameof(cardStatus));
 
             return new EmployeeCardStatusDto
             {
@@ -329,13 +428,31 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг статусов работника
+        /// </summary>
+        /// <param name="cardStatuses">Список статусов работника</param>
+        /// <returns>Список DTO "Статус"</returns>
+        public static List<EmployeeCardStatusDto> MapEmployeeCardStatus(this List<EmployeeCardStatus> cardStatuses)
+        {
+            if (cardStatuses == null)
+                throw new ArgumentNullException(nameof(cardStatuses));
+
+            var dtos = new List<EmployeeCardStatusDto>();
+
+            foreach (var cardStatus in cardStatuses)
+                dtos.Add(cardStatus.MapEmployeeCardStatus());
+
+            return dtos;
+        }
+
+        /// <summary>
         /// Маппинг инвалидности работника
         /// </summary>
         /// <param name="dto">DTO создания "Инвалидность"</param>
         /// <returns>Инвалидность работника</returns>
         public static EmployeeDisability MapEmployeeDisability(this CreateEmployeeDisabilityDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeDisability
             {
@@ -346,21 +463,60 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг инвалидностей работника
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Инвалидность"</param>
+        /// <returns>Список инвалидностей работника</returns>
+        public static List<EmployeeDisability> MapEmployeeDisability(this List<CreateEmployeeDisabilityDto> dtos)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var disability = new List<EmployeeDisability>();
+
+            foreach (var dto in dtos)
+                disability.Add(dto.MapEmployeeDisability());
+
+            return disability;
+        }
+
+        /// <summary>
         /// Маппинг инвалидности работника
         /// </summary>
         /// <param name="dto">DTO обновления "Инвалидность"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param>         
         /// <returns>Инвалидность работника</returns>
-        public static EmployeeDisability MapEmployeeDisability(this UpdateEmployeeDisabilityDto dto)
+        public static EmployeeDisability MapEmployeeDisability(this UpdateEmployeeDisabilityDto dto, int employeeCardId)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeDisability
             {
                 Id = dto.Id,
+                EmployeeCardId = employeeCardId,
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 Type = dto.Type
             };
+        }
+
+        /// <summary>
+        /// Маппинг инвалидностей работника
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Инвалидность"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param> 
+        /// <returns>Список инвалидностей работника</returns>
+        public static List<EmployeeDisability> MapEmployeeDisability(this List<UpdateEmployeeDisabilityDto> dtos, int employeeCardId)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var disability = new List<EmployeeDisability>();
+
+            foreach (var dto in dtos)
+                disability.Add(dto.MapEmployeeDisability(employeeCardId));
+
+            return disability;
         }
 
         /// <summary>
@@ -370,7 +526,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>DTO "Инвалидность"</returns>
         public static EmployeeDisabilityDto MapEmployeeDisability(this EmployeeDisability disability)
         {
-            if (disability == null) throw new NullReferenceException(nameof(disability));
+            if (disability == null) throw new ArgumentNullException(nameof(disability));
 
             return new EmployeeDisabilityDto
             {
@@ -382,13 +538,31 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг инвалидностей работника
+        /// </summary>
+        /// <param name="disabilities">Список инвалидностей работника</param>
+        /// <returns>Список DTO "Инвалидность"</returns>
+        public static List<EmployeeDisabilityDto> MapEmployeeDisability(this List<EmployeeDisability> disabilities)
+        {
+            if (disabilities == null)
+                throw new ArgumentNullException(nameof(disabilities));
+
+            var dtos = new List<EmployeeDisabilityDto>();
+
+            foreach (var disability in disabilities)
+                dtos.Add(disability.MapEmployeeDisability());
+
+            return dtos;
+        }
+
+        /// <summary>
         /// Маппинг спецстажа
         /// </summary>
         /// <param name="dto">DTO создания "Спецстаж"</param>
         /// <returns>Спецстаж</returns>
         public static EmployeeSpecialSeniority MapEmployeeSpecialSeniority(this CreateEmployeeSpecialSeniorityDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeSpecialSeniority
             {
@@ -401,19 +575,58 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <summary>
         /// Маппинг спецстажа
         /// </summary>
-        /// <param name="dto">DTO обновления "Спецстаж"</param>
-        /// <returns>Спецстаж</returns>
-        public static EmployeeSpecialSeniority MapEmployeeSpecialSeniority(this UpdateEmployeeSpecialSeniorityDto dto)
+        /// <param name="dtos">Список DTO обновления "Спецстаж"</param>
+        /// <returns>Список спецстажей</returns>
+        public static List<EmployeeSpecialSeniority> MapEmployeeSpecialSeniority(this List<CreateEmployeeSpecialSeniorityDto> dtos)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var specialSeniorities = new List<EmployeeSpecialSeniority>();
+
+            foreach (var dto in dtos)
+                specialSeniorities.Add(dto.MapEmployeeSpecialSeniority());
+
+            return specialSeniorities;
+        }
+
+        /// <summary>
+        /// Маппинг спецстажа
+        /// </summary>
+        /// <param name="dto">DTO обновления "Спецстаж"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param> 
+        /// <returns>Спецстаж</returns>
+        public static EmployeeSpecialSeniority MapEmployeeSpecialSeniority(this UpdateEmployeeSpecialSeniorityDto dto, int employeeCardId)
+        {
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new EmployeeSpecialSeniority
             {
                 Id = dto.Id,
+                EmployeeCardId = employeeCardId,
                 PeriodBegin = dto.PeriodBegin,
                 PeriodEnd = dto.PeriodEnd,
                 SpecialSeniorityId = dto.SpecialSeniorityId
             };
+        }
+
+        /// <summary>
+        /// Маппинг спецстажа
+        /// </summary>
+        /// <param name="dtos">Список DTO обновления "Спецстаж"</param>
+        /// <param name="employeeCardId">Идентификатор карточки работника</param> 
+        /// <returns>Список спецстажей</returns>
+        public static List<EmployeeSpecialSeniority> MapEmployeeSpecialSeniority(this List<UpdateEmployeeSpecialSeniorityDto> dtos, int employeeCardId)
+        {
+            if (dtos == null)
+                throw new ArgumentNullException(nameof(dtos));
+
+            var specialSeniorities = new List<EmployeeSpecialSeniority>();
+
+            foreach (var dto in dtos)
+                specialSeniorities.Add(dto.MapEmployeeSpecialSeniority(employeeCardId));
+
+            return specialSeniorities;
         }
 
         /// <summary>
@@ -423,7 +636,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         /// <returns>DTO "Спецстаж"</returns>
         public static EmployeeSpecialSeniorityDto MapEmployeeSpecialSeniority(this EmployeeSpecialSeniority specialSeniority)
         {
-            if (specialSeniority == null) throw new NullReferenceException(nameof(specialSeniority));
+            if (specialSeniority == null) throw new ArgumentNullException(nameof(specialSeniority));
 
             return new EmployeeSpecialSeniorityDto
             {
@@ -435,60 +648,52 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
         }
 
         /// <summary>
+        /// Маппинг спецстажей работника
+        /// </summary>
+        /// <param name="specialSeniorities">Список спецстажей</param>
+        /// <returns>Список DTO "Спецстаж"</returns>
+        public static List<EmployeeSpecialSeniorityDto> MapEmployeeSpecialSeniority(
+            this List<EmployeeSpecialSeniority> specialSeniorities)
+        {
+            if (specialSeniorities == null)
+                throw new ArgumentNullException(nameof(specialSeniorities));
+
+            var dtos = new List<EmployeeSpecialSeniorityDto>();
+
+            foreach (var specialSeniority in specialSeniorities)
+                dtos.Add(specialSeniority.MapEmployeeSpecialSeniority());
+
+            return dtos;
+        }
+
+        /// <summary>
         /// Маппинг карточки работника
         /// </summary>
         /// <param name="employeeCard">Карточка работника</param>
         /// <returns>DTO "Карточка работника"</returns>
         public static EmployeeCardDto MapEmployeeCardDto(this EmployeeCard employeeCard)
         {
-            if (employeeCard == null) throw new NullReferenceException(nameof(employeeCard));
+            if (employeeCard == null) throw new ArgumentNullException(nameof(employeeCard));
 
-            List<EmployeeChildrenDto> employeeChildren = null;
-            List<EmployeeTaxReliefDto> employeeTaxReliefs = null;
-            List<EmployeeCardStatusDto> employeeCardStatuses = null;
-            List<EmployeeDisabilityDto> employeeDisabilities = null;
-            List<EmployeeSpecialSeniorityDto> employeeSpecialSeniorities = null;
+            List<EmployeeChildrenDto> employeeChildren = employeeCard.EmployeeChildren != null 
+                ? employeeCard.EmployeeChildren.MapEmployeeChildren()
+                : null;
 
-            if (employeeCard.EmployeeChildren != null)
-            {
-                employeeChildren = new List<EmployeeChildrenDto>();
+            List<EmployeeCardStatusDto> employeeCardStatuses = employeeCard.EmployeeCardStatuses != null 
+                ? employeeCard.EmployeeCardStatuses.MapEmployeeCardStatus()
+                : null;
 
-                foreach (var children in employeeCard.EmployeeChildren)
-                    employeeChildren.Add(children.MapEmployeeChildren());
-            }
+            List<EmployeeTaxReliefDto> employeeTaxReliefs = employeeCard.EmployeeTaxReliefs != null
+                ? employeeCard.EmployeeTaxReliefs.MapEmployeeTaxRelief()
+                : null;
 
-            if (employeeCard.EmployeeTaxReliefs != null)
-            {
-                employeeTaxReliefs = new List<EmployeeTaxReliefDto>();
-
-                foreach (var taxRelief in employeeCard.EmployeeTaxReliefs)
-                    employeeTaxReliefs.Add(taxRelief.MapEmployeeTaxRelief());
-            }
-
-            if (employeeCard.EmployeeCardStatuses != null)
-            {
-                employeeCardStatuses = new List<EmployeeCardStatusDto>();
-
-                foreach (var cardStatus in employeeCard.EmployeeCardStatuses)
-                    employeeCardStatuses.Add(cardStatus.MapEmployeeCardStatus());
-            }
-
-            if (employeeCard.EmployeeDisabilities != null)
-            {
-                employeeDisabilities = new List<EmployeeDisabilityDto>();
-
-                foreach (var disability in employeeCard.EmployeeDisabilities)
-                    employeeDisabilities.Add(disability.MapEmployeeDisability());
-            }
-
-            if (employeeCard.EmployeeSpecialSeniorities != null)
-            {
-                employeeSpecialSeniorities = new List<EmployeeSpecialSeniorityDto>();
-
-                foreach (var specialSeniority in employeeCard.EmployeeSpecialSeniorities)
-                    employeeSpecialSeniorities.Add(specialSeniority.MapEmployeeSpecialSeniority());
-            }
-
+            List<EmployeeDisabilityDto> employeeDisabilities = employeeCard.EmployeeDisabilities != null 
+                ? employeeCard.EmployeeDisabilities.MapEmployeeDisability()
+                : null;
+            
+            List<EmployeeSpecialSeniorityDto> employeeSpecialSeniorities = employeeCard.EmployeeSpecialSeniorities != null
+                ? employeeCard.EmployeeSpecialSeniorities.MapEmployeeSpecialSeniority()
+                : null;
 
             return new EmployeeCardDto
             {
@@ -596,6 +801,6 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Extensions
                     Сoefficient = taxRelief.Сoefficient
                 }).ToList()
             });
-        }
+        }    
     }
 }

@@ -1,9 +1,12 @@
-﻿namespace Coolbuh.Core.Entities.Enums
+﻿using System;
+
+namespace Coolbuh.Core.Entities.Enums
 {
     /// <summary>
     /// Флаги каталога объединенной ведомости 
     /// </summary>
-    public enum ConsolidateReportCatalogFlags
+    [Flags]
+    public enum ConsolidateReportCatalogActions
     {
         /// <summary>
         /// Не рассчитывать

@@ -44,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Cre
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalAccrualType == null)
-                throw new NullReferenceException(nameof(request.AdditionalAccrualType));
+                throw new InvalidOperationException("request.AdditionalAccrualType is null");
 
             await CheckCreateListAdditionalAccrualTypeDtoAsync(request.AdditionalAccrualType, cancellationToken);
 
@@ -67,7 +67,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Cre
         private async Task CheckCreateListAdditionalAccrualTypeDtoAsync(CreateListAdditionalAccrualTypeDto additionalAccrualType,
             CancellationToken cancellationToken)
         {
-            if (additionalAccrualType == null) throw new NullReferenceException(nameof(additionalAccrualType));
+            if (additionalAccrualType == null) throw new ArgumentNullException(nameof(additionalAccrualType));
 
             if (await _dbContext.ListAdditionalAccrualTypes
                 .AnyAsync(rec => rec.Code == additionalAccrualType.Code, cancellationToken))

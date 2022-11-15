@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Commands.Del
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalPaymentType == null)
-                throw new NullReferenceException(nameof(request.AdditionalPaymentType));
+                throw new InvalidOperationException("request.AdditionalPaymentType is null");
 
             var additionalPaymentType =
                 await GetListAdditionalPaymentTypeAsync(request.AdditionalPaymentType.Id, cancellationToken);

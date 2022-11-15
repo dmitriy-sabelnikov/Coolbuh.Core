@@ -42,7 +42,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.UpdateListDepa
         public async Task<ListDepartmentDto> Handle(UpdateListDepartmentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Department == null) throw new NullReferenceException(nameof(request.Department));
+            if (request.Department == null) throw new InvalidOperationException("request.Department is null");
 
             await CheckListDepartmentAsync(request.Department, cancellationToken);
 
@@ -71,7 +71,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.UpdateListDepa
                 .Where(rec => rec.Code == department.Code || rec.Id == department.Id)
                 .ToListAsync(cancellationToken);
 
-            if (departments.Any(rec => rec.Id == department.Id) == false)
+            if (!departments.Any(rec => rec.Id == department.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі (id: {department.Id})");
 
             if (departments.Any(rec => rec.Id != department.Id))

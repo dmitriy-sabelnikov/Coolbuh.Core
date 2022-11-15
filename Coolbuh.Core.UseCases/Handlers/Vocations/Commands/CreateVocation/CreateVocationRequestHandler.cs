@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Commands.CreateVocation
         public async Task<VocationDto> Handle(CreateVocationRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Vocation == null) throw new NullReferenceException(nameof(request.Vocation));
+            if (request.Vocation == null) throw new InvalidOperationException("request.Vocation is null");
 
             await CheckCreateVocationDtoAsync(request.Vocation, cancellationToken);
 
@@ -62,12 +62,12 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Commands.CreateVocation
         {
             if (vocation == null) throw new ArgumentNullException(nameof(vocation));
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == vocation.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == vocation.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з {vocation.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == vocation.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == vocation.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі з {vocation.DepartmentId}");
         }
     }

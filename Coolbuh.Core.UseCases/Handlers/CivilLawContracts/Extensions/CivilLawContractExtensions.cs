@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Extensions
         /// <returns>Договор ГПХ</returns>
         public static CivilLawContract MapCivilLawContract(this CreateCivilLawContractDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new CivilLawContract
             {
@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Extensions
         /// <returns>Договор ГПХ</returns>
         public static CivilLawContract MapCivilLawContract(this UpdateCivilLawContractDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new CivilLawContract
             {
@@ -56,10 +56,9 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Extensions
         /// </summary>
         /// <param name="civilLawContract">Договор ГПХ</param>
         /// <returns>DTO "Договор ГПХ"</returns>
-        /// <exception cref="NullReferenceException"></exception>
         public static CivilLawContractDto MapCivilLawContractDto(this CivilLawContract civilLawContract)
         {
-            if (civilLawContract == null) throw new NullReferenceException(nameof(civilLawContract));
+            if (civilLawContract == null) throw new ArgumentNullException(nameof(civilLawContract));
 
             return new CivilLawContractDto
             {

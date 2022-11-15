@@ -38,7 +38,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.DeleteList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Administration == null) throw new NullReferenceException(nameof(request.Administration));
+            if (request.Administration == null) 
+                throw new InvalidOperationException("request.Administration is null");
 
             var administration = await GetListAdministrationAsync(request.Administration.Id, cancellationToken);
 

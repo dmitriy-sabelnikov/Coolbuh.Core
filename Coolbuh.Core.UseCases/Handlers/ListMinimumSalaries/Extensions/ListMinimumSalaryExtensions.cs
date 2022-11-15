@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Extensions
         /// <returns>Минимальная зарплата</returns>
         public static ListMinimumSalary MapListMinimumSalary(this CreateListMinimumSalaryDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListMinimumSalary
             {
@@ -34,7 +34,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Extensions
         /// <returns>Минимальная зарплата</returns>
         public static ListMinimumSalary MapListMinimumSalary(this UpdateListMinimumSalaryDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListMinimumSalary
             {
@@ -52,7 +52,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Extensions
         /// <returns>DTO "Минимальные зарплаты"</returns>
         public static ListMinimumSalaryDto MapListMinimumSalaryDto(this ListMinimumSalary minimumSalary)
         {
-            if (minimumSalary == null) throw new NullReferenceException(nameof(minimumSalary));
+            if (minimumSalary == null) throw new ArgumentNullException(nameof(minimumSalary));
 
             return new ListMinimumSalaryDto
             {

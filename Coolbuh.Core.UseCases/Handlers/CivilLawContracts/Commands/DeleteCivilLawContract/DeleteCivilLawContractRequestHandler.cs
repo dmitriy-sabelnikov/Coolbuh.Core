@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Commands.DeleteCivilL
         public async Task<CivilLawContractDto> Handle(DeleteCivilLawContractRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.CivilLawContract == null) throw new NullReferenceException(nameof(request.CivilLawContract));
+            if (request.CivilLawContract == null) throw new InvalidOperationException("request.CivilLawContract is null");
 
             var civilLawContract = await GetCivilLawContractAsync(request.CivilLawContract.Id, cancellationToken);
 

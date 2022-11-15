@@ -34,7 +34,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Commands.CalculateEmploye
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.EmployeeCard == null) throw new NullReferenceException(nameof(request.EmployeeCard));
+            if (request.EmployeeCard == null) throw new InvalidOperationException("request.EmployeeCard is null");
 
             var taxIdentificationNumber = request.EmployeeCard.TaxIdentificationNumber;
 

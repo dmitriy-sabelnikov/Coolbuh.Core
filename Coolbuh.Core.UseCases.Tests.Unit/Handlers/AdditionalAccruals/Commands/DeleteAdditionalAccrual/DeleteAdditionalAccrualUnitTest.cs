@@ -57,10 +57,9 @@ namespace Coolbuh.Core.UseCases.Tests.Unit.Handlers.AdditionalAccruals.Commands.
         /// </summary>
         /// <param name="additionalAccrual">Дополнительное начисление</param>
         /// <returns>DTO удаления "Дополнительное начисление"</returns>
-        /// <exception cref="NullReferenceException"></exception>
         private static DeleteAdditionalAccrualDto GetFakeDeleteAdditionalAccrualDto(AdditionalAccrual additionalAccrual)
         {
-            if (additionalAccrual == null) throw new NullReferenceException(nameof(additionalAccrual));
+            if (additionalAccrual == null) throw new ArgumentNullException(nameof(additionalAccrual));
 
             return new DeleteAdditionalAccrualDto
             {

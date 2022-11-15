@@ -1,4 +1,5 @@
 ﻿using Coolbuh.Core.DomainServices.Interfaces;
+using Coolbuh.Core.Entities.Models;
 using Coolbuh.Core.Infrastructure.Interfaces.DataAccess;
 using Coolbuh.Core.UseCases.Exceptions;
 using Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Dto;
@@ -43,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.CreateAddit
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.AdditionalAccrual == null)
-                throw new NullReferenceException(nameof(request.AdditionalAccrual));
+                throw new InvalidOperationException("request.AdditionalAccrual is null");
 
             await CheckCreateAdditionalAccrualDtoAsync(request.AdditionalAccrual, cancellationToken);
 
@@ -65,20 +66,18 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.CreateAddit
         private async Task CheckCreateAdditionalAccrualDtoAsync(CreateAdditionalAccrualDto additionalAccrual,
             CancellationToken cancellationToken)
         {
-            if (additionalAccrual == null) throw new NullReferenceException(nameof(additionalAccrual));
-
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутня картка робітника в базі з id {additionalAccrual.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній підрозділ в базі з id {additionalAccrual.DepartmentId}");
 
-            if (await _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.AdditionalAccrualTypeId, cancellationToken) == false)
+            if (!await _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.AdditionalAccrualTypeId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній тип додаткового нарахування в базі з id {additionalAccrual.AdditionalAccrualTypeId}");
         }

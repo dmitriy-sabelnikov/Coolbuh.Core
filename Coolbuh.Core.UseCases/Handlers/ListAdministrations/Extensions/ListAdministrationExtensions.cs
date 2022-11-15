@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Extensions
         /// <returns>Администрация</returns>
         public static ListAdministration MapListAdministration(this CreateListAdministrationDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListAdministration
             {
@@ -35,7 +35,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Extensions
         /// <returns>Администрация</returns>
         public static ListAdministration MapListAdministration(this UpdateListAdministrationDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListAdministration
             {
@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Extensions
         /// <returns>DTO "Администрации"</returns>
         public static ListAdministrationDto MapListAdministrationDto(this ListAdministration administration)
         {
-            if (administration == null) throw new NullReferenceException(nameof(administration));
+            if (administration == null) throw new ArgumentNullException(nameof(administration));
 
             return new ListAdministrationDto
             {

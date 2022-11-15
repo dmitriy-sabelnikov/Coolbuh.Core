@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AccountingPeriods.Extensions
         public static List<AccountingPeriodDto> MapListAccountingPeriodDto(
             this IEnumerable<AccountingPeriod> accountingPeriods)
         {
-            if (accountingPeriods == null) throw new NullReferenceException(nameof(accountingPeriods));
+            if (accountingPeriods == null) throw new ArgumentNullException(nameof(accountingPeriods));
 
             var result = new List<AccountingPeriodDto>();
 
@@ -35,7 +35,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AccountingPeriods.Extensions
         /// <returns>DTO "Отчетный период"</returns>
         public static AccountingPeriodDto MapAccountingPeriodDto(this AccountingPeriod accountingPeriod)
         {
-            if (accountingPeriod == null) throw new NullReferenceException(nameof(accountingPeriod));
+            if (accountingPeriod == null) throw new ArgumentNullException(nameof(accountingPeriod));
 
             return new AccountingPeriodDto
             {

@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Commands.CreateL
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SpecialSeniority == null) throw new NullReferenceException(nameof(request.SpecialSeniority));
+            if (request.SpecialSeniority == null) throw new InvalidOperationException("request.SpecialSeniority is null");
 
             await CheckCreateListSpecialSeniorityDtoAsync(request.SpecialSeniority, cancellationToken);
 

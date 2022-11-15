@@ -42,12 +42,12 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Commands.UpdateListLivi
         public async Task<ListLivingWageDto> Handle(UpdateListLivingWageRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.LivingWage == null) throw new NullReferenceException(nameof(request.LivingWage));
+            if (request.LivingWage == null) throw new InvalidOperationException("request.LivingWage is null");
 
             var livingWage = request.LivingWage.MapListLivingWage();
             var livingWages = await _dbContext.ListLivingWages.AsNoTracking().ToListAsync(cancellationToken);
 
-            if (livingWages.Any(rec => rec.Id == livingWage.Id) == false)
+            if (!livingWages.Any(rec => rec.Id == livingWage.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутній прожитковий мінімум в базі (id: {livingWage.Id})");
 
             _livingWagesService.ValidationEntity(livingWage);

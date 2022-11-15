@@ -26,7 +26,33 @@ namespace Coolbuh.Core.DomainServices.Implementation
         {
             if (employeeCard == null) throw new ArgumentNullException(nameof(employeeCard));
 
-            //=================================================Карточка работника==================================================================
+            // Валидция параметров карточки работника
+            ValidateEmployeeCard(employeeCard);
+
+            // Валидция параметров статусов карточки работника
+            ValidateEmployeeCardStatuses(employeeCard.EmployeeCardStatuses);
+
+            // Валидция параметров детей карточки работника
+            ValidateEmployeeChildren(employeeCard.EmployeeChildren);
+
+            // Валидция параметров инвалидностей карточки работника
+            ValidateEmployeeDisabilities(employeeCard.EmployeeDisabilities);
+
+            // Валидция параметров спецстажей карточки работника
+            ValidateEmployeeSpecialSeniorities(employeeCard.EmployeeSpecialSeniorities);
+
+            // Валидция параметров налоговіх льгот карточки работника
+            ValidateEmployeeTaxReliefs(employeeCard.EmployeeTaxReliefs);
+        }
+
+        /// <summary>
+        /// Валидация параметров карточки работника
+        /// </summary>
+        /// <param name="employeeCard">Карточка работника</param>
+        private void ValidateEmployeeCard(EmployeeCard employeeCard)
+        {
+            if (employeeCard == null) throw new ArgumentNullException(nameof(employeeCard));
+
             if (string.IsNullOrEmpty(employeeCard.FirstName))
                 throw new NotValidEntityEntityException("Картка робітника: не заповнене ім'я");
 
@@ -49,91 +75,121 @@ namespace Coolbuh.Core.DomainServices.Implementation
                     "довжина прізвища не повинна перевищувати {EmployeeCardConstants.LastNameLength}");
 
             _taxIdentificationNumberService.ValidationTaxIdentificationNumber(employeeCard.TaxIdentificationNumber);
+        }
 
-            //=================================================Карточка работника. Статус============================================================
-            if (employeeCard.EmployeeCardStatuses is { Count: > 0 })
+        /// <summary>
+        /// Валидация параметров статусов карточки работника        
+        /// </summary>
+        /// <param name="cardStatuses">Статусы карточки работника</param>
+        private static void ValidateEmployeeCardStatuses(List<EmployeeCardStatus> cardStatuses)
+        {
+            if (cardStatuses is not { Count: > 0 })
+                return;
+
+            foreach (var сardStatus in cardStatuses)
             {
-                foreach (var сardStatus in employeeCard.EmployeeCardStatuses)
-                {
-                    if (сardStatus.CardStatusTypeId == 0)
-                        throw new NotValidEntityEntityException("Статус: не заповнений тип статуса");
+                if (сardStatus.CardStatusTypeId == 0)
+                    throw new NotValidEntityEntityException("Статус: не заповнений тип статуса");
+            
+                if (сardStatus.PeriodEnd != null && сardStatus.PeriodBegin != null &&
+                    сardStatus.PeriodBegin > сardStatus.PeriodEnd)
+                    throw new NotValidEntityEntityException("Статус: дата початку більше за дату закінчення");
+            }
+            
+            if (IsExistsPeriodIntersection(cardStatuses))
+                throw new NotValidEntityEntityException("Статус: є періоди, що перетинається");
+        }
 
-                    if (сardStatus.PeriodEnd != null && сardStatus.PeriodBegin != null &&
-                        сardStatus.PeriodBegin > сardStatus.PeriodEnd)
-                        throw new NotValidEntityEntityException("Статус: дата початку більше за дату закінчення");
-                }
+        /// <summary>
+        /// Валидация параметров детей карточки работника
+        /// </summary>
+        /// <param name="children">Дети</param>
+        private static void ValidateEmployeeChildren(List<EmployeeChildren> children)
+        {
+            if (children is not { Count: > 0 })
+                return;
+            
+            foreach (var child in children)
+            {
+                if (child.Number == 0)
+                    throw new NotValidEntityEntityException("Діти: кількість дітей не заповнена");
+            
+                if (child.PeriodEnd != null && child.PeriodBegin != null &&
+                    child.PeriodBegin > child.PeriodEnd)
+                    throw new NotValidEntityEntityException("Діти: дата початку більше за дату закінчення");
+            }
+            
+            if (IsExistsPeriodIntersection(children))
+                throw new NotValidEntityEntityException("Діти: є періоди, що перетинається");
+        }
 
-                if (IsExistsPeriodIntersection(employeeCard.EmployeeCardStatuses))
-                    throw new NotValidEntityEntityException("Статус: є періоди, що перетинається");
+        /// <summary>
+        /// Валидация параметров инвалидностей карточки работника
+        /// </summary>
+        /// <param name="disabilities">Инвалидности</param>
+        private static void ValidateEmployeeDisabilities(List<EmployeeDisability> disabilities)
+        {
+            if (disabilities is not { Count: > 0 })
+                return;
+            
+            foreach (var disability in disabilities)
+            {
+                if (disability.Type == 0)
+                    throw new NotValidEntityEntityException("Iнвалідність: тип інвалідності не заповнений");
+
+                if (disability.PeriodEnd != null && disability.PeriodBegin != null &&
+                    disability.PeriodBegin > disability.PeriodEnd)
+                    throw new NotValidEntityEntityException("Iнвалідність: дата початку більше за дату закінчення");
             }
 
-            //=================================================Карточка работника. Дети============================================================
-            if (employeeCard.EmployeeChildren is { Count: > 0 })
+            if (IsExistsPeriodIntersection(disabilities))
+                throw new NotValidEntityEntityException("Iнвалідність: є періоди, що перетинається");
+        }
+
+        /// <summary>
+        /// Валидация параметров спецстажей карточки работника
+        /// </summary>
+        /// <param name="specialSeniorities">Спецстажи</param>
+        private static void ValidateEmployeeSpecialSeniorities(List<EmployeeSpecialSeniority> specialSeniorities)
+        {
+            if (specialSeniorities is not { Count: > 0 })
+                return;
+
+            foreach (var specialSeniority in specialSeniorities)
             {
-                foreach (var child in employeeCard.EmployeeChildren)
-                {
-                    if (child.Number == 0)
-                        throw new NotValidEntityEntityException("Діти: кількість дітей не заповнена");
+                if (specialSeniority.SpecialSeniorityId == 0)
+                    throw new NotValidEntityEntityException("Спецстаж: тип спецстажу не заповнений");
 
-                    if (child.PeriodEnd != null && child.PeriodBegin != null &&
-                        child.PeriodBegin > child.PeriodEnd)
-                        throw new NotValidEntityEntityException("Діти: дата початку більше за дату закінчення");
-                }
-
-                if (IsExistsPeriodIntersection(employeeCard.EmployeeChildren))
-                    throw new NotValidEntityEntityException("Діти: є періоди, що перетинається");
+                if (specialSeniority.PeriodEnd != null && specialSeniority.PeriodBegin != null &&
+                    specialSeniority.PeriodBegin > specialSeniority.PeriodEnd)
+                    throw new NotValidEntityEntityException("Спецстаж: дата початку більше за дату закінчення");
             }
 
-            //=================================================Карточка работника. Инвалидность====================================================
-            if (employeeCard.EmployeeDisabilities is { Count: > 0 })
+            if (IsExistsPeriodIntersection(specialSeniorities))
+                throw new NotValidEntityEntityException("Спецстаж: є періоди, що перетинається");
+        }
+
+        /// <summary>
+        /// Валидация параметров налоговых льгот карточки работника
+        /// </summary>
+        /// <param name="taxReliefs">Налоговые льготы</param>
+        private static void ValidateEmployeeTaxReliefs(List<EmployeeTaxRelief> taxReliefs)
+        {
+            if (taxReliefs is not { Count: > 0 })
+                return;
+            
+            foreach (var taxRelief in taxReliefs)
             {
-                foreach (var disability in employeeCard.EmployeeDisabilities)
-                {
-                    if (disability.Type == 0)
-                        throw new NotValidEntityEntityException("Iнвалідність: тип інвалідності не заповнений");
+                if (taxRelief.Сoefficient == 0)
+                    throw new NotValidEntityEntityException("Податкові пільги: коефіцієнт пільги не заповнений");
 
-                    if (disability.PeriodEnd != null && disability.PeriodBegin != null &&
-                        disability.PeriodBegin > disability.PeriodEnd)
-                        throw new NotValidEntityEntityException("Iнвалідність: дата початку більше за дату закінчення");
-                }
-
-                if (IsExistsPeriodIntersection(employeeCard.EmployeeDisabilities))
-                    throw new NotValidEntityEntityException("Iнвалідність: є періоди, що перетинається");
+                if (taxRelief.PeriodEnd != null && taxRelief.PeriodBegin != null &&
+                    taxRelief.PeriodBegin > taxRelief.PeriodEnd)
+                    throw new NotValidEntityEntityException("Податкові пільги: дата початку більше за дату закінчення");
             }
 
-            //=================================================Карточка работника. Спецстаж========================================================
-            if (employeeCard.EmployeeSpecialSeniorities is { Count: > 0 })
-            {
-                foreach (var specialSeniority in employeeCard.EmployeeSpecialSeniorities)
-                {
-                    if (specialSeniority.SpecialSeniorityId == 0)
-                        throw new NotValidEntityEntityException("Спецстаж: тип спецстажу не заповнений");
-
-                    if (specialSeniority.PeriodEnd != null && specialSeniority.PeriodBegin != null &&
-                        specialSeniority.PeriodBegin > specialSeniority.PeriodEnd)
-                        throw new NotValidEntityEntityException("Спецстаж: дата початку більше за дату закінчення");
-                }
-
-                if (IsExistsPeriodIntersection(employeeCard.EmployeeSpecialSeniorities))
-                    throw new NotValidEntityEntityException("Спецстаж: є періоди, що перетинається");
-            }
-
-            //=================================================Карточка работника. Налоговые льготы================================================
-            if (employeeCard.EmployeeTaxReliefs is { Count: > 0 })
-            {
-                foreach (var taxRelief in employeeCard.EmployeeTaxReliefs)
-                {
-                    if (taxRelief.Сoefficient == 0)
-                        throw new NotValidEntityEntityException("Податкові пільги: коефіцієнт пільги не заповнений");
-
-                    if (taxRelief.PeriodEnd != null && taxRelief.PeriodBegin != null &&
-                        taxRelief.PeriodBegin > taxRelief.PeriodEnd)
-                        throw new NotValidEntityEntityException("Податкові пільги: дата початку більше за дату закінчення");
-                }
-
-                if (IsExistsPeriodIntersection(employeeCard.EmployeeTaxReliefs))
-                    throw new NotValidEntityEntityException("Податкові пільги: є періоди, що перетинається");
-            }
+            if (IsExistsPeriodIntersection(taxReliefs))
+                throw new NotValidEntityEntityException("Податкові пільги: є періоди, що перетинається");
         }
 
         /// <summary>

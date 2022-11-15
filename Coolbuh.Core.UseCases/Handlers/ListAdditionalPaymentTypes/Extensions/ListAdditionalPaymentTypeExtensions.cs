@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Extensions
         /// <returns>Тип дополнительных выплат</returns>
         public static ListAdditionalPaymentType MapListAdditionalPaymentType(this CreateListAdditionalPaymentTypeDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListAdditionalPaymentType
             {
@@ -33,8 +33,8 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Extensions
         /// <returns>Тип дополнительных выплат</returns>
         public static ListAdditionalPaymentType MapListAdditionalPaymentType(this UpdateListAdditionalPaymentTypeDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
-
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
+                
             return new ListAdditionalPaymentType
             {
                 Id = dto.Id,
@@ -51,7 +51,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Extensions
         public static ListAdditionalPaymentTypeDto MapListAdditionalPaymentTypeDto(
             this ListAdditionalPaymentType additionalPaymentType)
         {
-            if (additionalPaymentType == null) throw new NullReferenceException(nameof(additionalPaymentType));
+            if (additionalPaymentType == null) throw new ArgumentNullException(nameof(additionalPaymentType));
 
             return new ListAdditionalPaymentTypeDto
             {

@@ -37,8 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.DeleteListDepa
         public async Task<ListDepartmentDto> Handle(DeleteListDepartmentRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Department == null)
-                throw new NullReferenceException(nameof(request.Department));
+            if (request.Department == null) throw new InvalidOperationException("request.Department is null");
 
             var department = await GetListDepartmentAsync(request.Department.Id, cancellationToken);
 

@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Extensions
         /// <returns>Отпуск</returns>
         public static Vocation MapVocation(this CreateVocationDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new Vocation
             {
@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Extensions
         /// <returns>Отпуск</returns>
         public static Vocation MapVocation(this UpdateVocationDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new Vocation
             {
@@ -58,7 +58,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Extensions
         /// <returns>DTO "Отпуск"</returns>
         public static VocationDto MapVocationDto(this Vocation vocation)
         {
-            if (vocation == null) throw new NullReferenceException(nameof(vocation));
+            if (vocation == null) throw new ArgumentNullException(nameof(vocation));
 
             return new VocationDto
             {

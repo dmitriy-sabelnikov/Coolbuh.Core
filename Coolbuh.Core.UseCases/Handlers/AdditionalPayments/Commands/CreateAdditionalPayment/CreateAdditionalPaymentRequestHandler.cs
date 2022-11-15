@@ -43,8 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Commands.CreateAddit
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.AdditionalPayment == null)
-                throw new NullReferenceException(nameof(request.AdditionalPayment));
+            if (request.AdditionalPayment == null) throw new InvalidOperationException("request.AdditionalPayment is null");
 
             await CheckCreateAdditionalPaymentDtoAsync(request.AdditionalPayment, cancellationToken);
 
@@ -66,15 +65,15 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Commands.CreateAddit
         private async Task CheckCreateAdditionalPaymentDtoAsync(CreateAdditionalPaymentDto additionalPayment,
             CancellationToken cancellationToken)
         {
-            if (additionalPayment == null) throw new NullReferenceException(nameof(additionalPayment));
+            if (additionalPayment == null) throw new ArgumentNullException(nameof(additionalPayment));
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalPayment.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalPayment.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутня картка робітника в базі з {additionalPayment.EmployeeCardId}");
 
-            if (await _dbContext.ListAdditionalPaymentTypes.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalPayment.AdditionalPaymentTypeId, cancellationToken) == false)
+            if (!await _dbContext.ListAdditionalPaymentTypes.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalPayment.AdditionalPaymentTypeId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній тип додаткової виплати в базі з {additionalPayment.AdditionalPaymentTypeId}");
         }

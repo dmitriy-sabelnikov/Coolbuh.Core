@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Commands.DeleteList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.MinimumSalary == null) throw new NullReferenceException(nameof(request.MinimumSalary));
+            if (request.MinimumSalary == null) throw new InvalidOperationException("request.MinimumSalary is null");
 
             var minimumSalary =
                 await GetListMinimumSalaryAsync(request.MinimumSalary.Id, cancellationToken);

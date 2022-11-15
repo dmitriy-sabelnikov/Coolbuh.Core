@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.UpdateSalary
         public async Task<SalaryDto> Handle(UpdateSalaryRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Salary == null) throw new NullReferenceException(nameof(request.Salary));
+            if (request.Salary == null) throw new InvalidOperationException("request.Salary is null");
 
             await CheckSalaryAsync(request.Salary, cancellationToken);
 
@@ -57,9 +57,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.UpdateSalary
                     throw new NotFoundEntityUseCaseException(
                         $"Відсутня надбавка за пенсію в базі з id {salary.PensionAllowanceId}");
 
-                salary.PensionAllowanceSum = allowance != null
-                    ? _salariesService.CalculatePensionAllowanceSum(salary.BaseSum, allowance.Percent)
-                    : 0;
+                salary.PensionAllowanceSum = _salariesService.CalculatePensionAllowanceSum(salary.BaseSum, allowance.Percent);
             }
 
             //Расчет надбавки за классность
@@ -72,9 +70,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.UpdateSalary
                     throw new NotFoundEntityUseCaseException(
                         $"Відсутня надбавка за класність в базі з id {salary.GradeAllowanceId}");
 
-                salary.GradeAllowanceSum = allowance != null
-                    ? _salariesService.CalculateGradeAllowanceSum(salary.BaseSum, allowance.Percent)
-                    : 0;
+                salary.GradeAllowanceSum = _salariesService.CalculateGradeAllowanceSum(salary.BaseSum, allowance.Percent);
             }
 
             //Расчет другой надбавки
@@ -87,9 +83,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.UpdateSalary
                     throw new NotFoundEntityUseCaseException(
                         $"Відсутня інша надбавка в базі з id {salary.OtherAllowanceId}");
 
-                salary.OtherAllowanceSum = allowance != null
-                    ? _salariesService.CalculateOtherAllowanceSum(salary.BaseSum, allowance.Percent)
-                    : 0;
+                salary.OtherAllowanceSum = _salariesService.CalculateOtherAllowanceSum(salary.BaseSum, allowance.Percent);
             }
 
             //Расчет итоговой суммы
@@ -111,16 +105,16 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.UpdateSalary
         {
             if (salary == null) throw new ArgumentNullException(nameof(salary));
 
-            if (await _dbContext.Salaries.AsNoTracking()
-                .AnyAsync(rec => rec.Id == salary.Id, cancellationToken) == false)
+            if (!await _dbContext.Salaries.AsNoTracking()
+                .AnyAsync(rec => rec.Id == salary.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня зарплата в базі з id {salary.Id}");
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == salary.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == salary.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з id {salary.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == salary.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == salary.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі з id {salary.DepartmentId}");
         }
     }

@@ -16,7 +16,7 @@ namespace Coolbuh.Core.WebCore
             {
                 scope.ServiceProvider.GetRequiredService<IDbContext>()?.UpdateDb();
             }
-
+            
             host.Run();
         }
 

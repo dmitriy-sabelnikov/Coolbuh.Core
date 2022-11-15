@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Commands.CreateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.MinimumSalary == null) throw new NullReferenceException(nameof(request.MinimumSalary));
+            if (request.MinimumSalary == null) throw new InvalidOperationException("request.MinimumSalary is null");
 
             var minimumSalary = request.MinimumSalary.MapListMinimumSalary();
             _minimumSalaryService.ValidationEntity(minimumSalary);

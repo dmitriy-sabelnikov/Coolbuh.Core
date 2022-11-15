@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Extensions
         /// <returns>Дополнительная выплата</returns>
         public static AdditionalPayment MapAdditionalPayment(this CreateAdditionalPaymentDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new AdditionalPayment
             {
@@ -35,7 +35,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Extensions
         /// <returns>Дополнительная выплата</returns>
         public static AdditionalPayment MapAdditionalPayment(this UpdateAdditionalPaymentDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new AdditionalPayment
             {
@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Extensions
         /// <returns>DTO "Дополнительная выплата"</returns>
         public static AdditionalPaymentDto MapAdditionalPaymentDto(this AdditionalPayment additionalPayment)
         {
-            if (additionalPayment == null) throw new NullReferenceException(nameof(additionalPayment));
+            if (additionalPayment == null) throw new ArgumentNullException(nameof(additionalPayment));
 
             return new AdditionalPaymentDto
             {

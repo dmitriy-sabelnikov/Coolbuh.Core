@@ -43,8 +43,8 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.UpdateAddit
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.AdditionalAccrual == null)
-                throw new NullReferenceException(nameof(request.AdditionalAccrual));
+            if (request.AdditionalAccrual == null) 
+                throw new InvalidOperationException("request.AdditionalAccrual is null");
 
             await CheckUpdateAdditionalAccrualDtoAsync(request.AdditionalAccrual, cancellationToken);
 
@@ -66,25 +66,25 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.UpdateAddit
         private async Task CheckUpdateAdditionalAccrualDtoAsync(UpdateAdditionalAccrualDto additionalAccrual,
             CancellationToken cancellationToken)
         {
-            if (additionalAccrual == null) throw new NullReferenceException(nameof(additionalAccrual));
+            if (additionalAccrual == null) throw new ArgumentNullException(nameof(additionalAccrual));
 
-            if (await _dbContext.AdditionalAccruals.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.Id, cancellationToken) == false)
+            if (!await _dbContext.AdditionalAccruals.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутнє додаткове нарахування в базі з id {additionalAccrual.Id}");
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутня картка робітника в базі з id {additionalAccrual.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній підрозділ в базі з id {additionalAccrual.DepartmentId}");
 
-            if (await _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
-                .AnyAsync(rec => rec.Id == additionalAccrual.AdditionalAccrualTypeId, cancellationToken) == false)
+            if (!await _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
+                .AnyAsync(rec => rec.Id == additionalAccrual.AdditionalAccrualTypeId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутній тип додаткового нарахування в базі з id {additionalAccrual.AdditionalAccrualTypeId}");
         }

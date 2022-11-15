@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.DeleteSalary
         public async Task<SalaryDto> Handle(DeleteSalaryRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.Salary == null) throw new NullReferenceException(nameof(request.Salary));
+            if (request.Salary == null) throw new InvalidOperationException("request.Salary is null");
 
             var salary = await GetSalaryAsync(request.Salary.Id, cancellationToken);
 

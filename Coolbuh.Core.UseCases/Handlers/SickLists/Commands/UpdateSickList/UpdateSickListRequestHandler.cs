@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.UpdateSickList
         public async Task<SickListDto> Handle(UpdateSickListRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.SickList == null) throw new NullReferenceException(nameof(request.SickList));
+            if (request.SickList == null) throw new InvalidOperationException("request.SickList is null");
 
             await CheckUpdateSickListDtoAsync(request.SickList, cancellationToken);
 
@@ -62,16 +62,16 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.UpdateSickList
         {
             if (sickList == null) throw new ArgumentNullException(nameof(sickList));
 
-            if (await _dbContext.SickLists.AsNoTracking()
-                .AnyAsync(rec => rec.Id == sickList.Id, cancellationToken) == false)
+            if (!await _dbContext.SickLists.AsNoTracking()
+                .AnyAsync(rec => rec.Id == sickList.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній лікарняний в базі (id: {sickList.Id})");
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == sickList.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == sickList.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутня картка робітника в базі з {sickList.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == sickList.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == sickList.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі з {sickList.DepartmentId}");
         }
     }

@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.CreateList
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.GradeAllowance == null) throw new NullReferenceException(nameof(request.GradeAllowance));
+            if (request.GradeAllowance == null) throw new InvalidOperationException("request.GradeAllowance is null");
 
             await CheckCreateListGradeAllowanceDtoAsync(request.GradeAllowance, cancellationToken);
 

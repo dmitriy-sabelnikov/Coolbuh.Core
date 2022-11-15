@@ -44,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Commands.UpdateConso
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             if (request.ConsolidateReportCatalog == null)
-                throw new NullReferenceException(nameof(request.ConsolidateReportCatalog));
+                throw new InvalidOperationException("request.ConsolidateReportCatalog is null");
 
             var updateReportCatalog = await _dbContext.ConsolidateReportCatalogs
                 .FirstOrDefaultAsync(rec => rec.Id == request.ConsolidateReportCatalog.Id, cancellationToken);

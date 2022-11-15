@@ -44,7 +44,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Commands.UpdateLi
             CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.PensionAllowance == null) throw new NullReferenceException(nameof(request.PensionAllowance));
+            if (request.PensionAllowance == null) throw new InvalidOperationException("request.PensionAllowance is null");
 
             await CheckUpdateListPensionAllowanceDtoAsync(request.PensionAllowance, cancellationToken);
 
@@ -73,7 +73,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Commands.UpdateLi
                 .Where(rec => rec.Code == pensionAllowance.Code || rec.Id == pensionAllowance.Id)
                 .ToListAsync(cancellationToken);
 
-            if (pensionAllowances.Any(rec => rec.Id == pensionAllowance.Id) == false)
+            if (!pensionAllowances.Any(rec => rec.Id == pensionAllowance.Id))
                 throw new NotFoundEntityUseCaseException($"Відсутня пенсійна надбавка в базі (id: {pensionAllowance.Id})");
 
             if (pensionAllowances.Any(rec => rec.Id != pensionAllowance.Id))

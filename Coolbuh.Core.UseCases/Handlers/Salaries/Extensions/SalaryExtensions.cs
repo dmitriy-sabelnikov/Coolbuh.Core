@@ -17,7 +17,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Extensions
         /// <returns>Зарплата</returns>
         public static Salary MapSalary(this CreateSalaryDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new Salary
             {
@@ -43,7 +43,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Extensions
         /// <returns>Зарплата</returns>
         public static Salary MapSalary(this UpdateSalaryDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new Salary
             {

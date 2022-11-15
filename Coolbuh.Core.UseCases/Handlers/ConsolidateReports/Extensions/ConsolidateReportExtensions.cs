@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
         /// <returns>Каталог объединенной ведомости</returns>
         public static ConsolidateReportCatalog MapConsolidateReportCatalog(this CreateConsolidateReportCatalogDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ConsolidateReportCatalog
             {
@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
         /// <returns>Каталог объединенной ведомости</returns>
         public static ConsolidateReportCatalog MapConsolidateReportCatalog(this UpdateConsolidateReportCatalogDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ConsolidateReportCatalog
             {
@@ -53,10 +53,9 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
         /// </summary>
         /// <param name="consolidateReportCatalog">DTO "Каталог объединенной ведомости"</param>
         /// <returns>Каталог объединенной ведомости</returns>
-        /// <exception cref="NullReferenceException"></exception>
         public static ConsolidateReportCatalogDto MapConsolidateReportCatalogDto(this ConsolidateReportCatalog consolidateReportCatalog)
         {
-            if (consolidateReportCatalog == null) throw new NullReferenceException(nameof(consolidateReportCatalog));
+            if (consolidateReportCatalog == null) throw new ArgumentNullException(nameof(consolidateReportCatalog));
 
             return new ConsolidateReportCatalogDto
             {
@@ -66,9 +65,9 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
                 Number = consolidateReportCatalog.Number,
                 Name = consolidateReportCatalog.Name,
                 CalculateDate = consolidateReportCatalog.CalculateDate,
-                IsAskAboutCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsAskAboutCalculate) > 0,
-                IsCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsCalculate) > 0,
-                IsNoCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsNoCalculate) > 0
+                IsAskAboutCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsAskAboutCalculate) > 0,
+                IsCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsCalculate) > 0,
+                IsNoCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsNoCalculate) > 0
             };
         }
 
@@ -88,9 +87,9 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
                 Number = consolidateReportCatalog.Number,
                 Name = consolidateReportCatalog.Name,
                 CalculateDate = consolidateReportCatalog.CalculateDate,
-                IsAskAboutCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsAskAboutCalculate) > 0,
-                IsCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsCalculate) > 0,
-                IsNoCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogFlags.IsNoCalculate) > 0
+                IsAskAboutCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsAskAboutCalculate) > 0,
+                IsCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsCalculate) > 0,
+                IsNoCalculate = (consolidateReportCatalog.Flags & (int)ConsolidateReportCatalogActions.IsNoCalculate) > 0
             });
         }
 
@@ -206,11 +205,11 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Extensions
         {
             var flags = 0;
             if (isCalculate)
-                flags += (int)ConsolidateReportCatalogFlags.IsCalculate;
+                flags += (int)ConsolidateReportCatalogActions.IsCalculate;
             else if (isAskAboutCalculate)
-                flags += (int)ConsolidateReportCatalogFlags.IsAskAboutCalculate;
+                flags += (int)ConsolidateReportCatalogActions.IsAskAboutCalculate;
             else
-                flags += (int)ConsolidateReportCatalogFlags.IsNoCalculate;
+                flags += (int)ConsolidateReportCatalogActions.IsNoCalculate;
 
             return flags;
         }

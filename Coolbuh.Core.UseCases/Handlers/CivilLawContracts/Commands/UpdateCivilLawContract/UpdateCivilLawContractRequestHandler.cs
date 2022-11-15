@@ -41,7 +41,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Commands.UpdateCivilL
         public async Task<CivilLawContractDto> Handle(UpdateCivilLawContractRequest request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (request.CivilLawContract == null) throw new NullReferenceException(nameof(request.CivilLawContract));
+            if (request.CivilLawContract == null) throw new InvalidOperationException("request.CivilLawContract is null");
 
             await CheckUpdateCivilLawContractDtoAsync(request.CivilLawContract, cancellationToken);
 
@@ -64,19 +64,19 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Commands.UpdateCivilL
         private async Task CheckUpdateCivilLawContractDtoAsync(UpdateCivilLawContractDto civilLawContract,
             CancellationToken cancellationToken)
         {
-            if (civilLawContract == null) throw new NullReferenceException(nameof(civilLawContract));
+            if (civilLawContract == null) throw new ArgumentNullException(nameof(civilLawContract));
 
-            if (await _dbContext.CivilLawContracts.AsNoTracking()
-                .AnyAsync(rec => rec.Id == civilLawContract.Id, cancellationToken) == false)
+            if (!await _dbContext.CivilLawContracts.AsNoTracking()
+                .AnyAsync(rec => rec.Id == civilLawContract.Id, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній договор ЦПХ в базі (id: {civilLawContract.Id})");
 
-            if (await _dbContext.EmployeeCards.AsNoTracking()
-                .AnyAsync(rec => rec.Id == civilLawContract.EmployeeCardId, cancellationToken) == false)
+            if (!await _dbContext.EmployeeCards.AsNoTracking()
+                .AnyAsync(rec => rec.Id == civilLawContract.EmployeeCardId, cancellationToken))
                 throw new NotFoundEntityUseCaseException(
                     $"Відсутня картка робітника в базі з {civilLawContract.EmployeeCardId}");
 
-            if (await _dbContext.ListDepartments.AsNoTracking()
-                .AnyAsync(rec => rec.Id == civilLawContract.DepartmentId, cancellationToken) == false)
+            if (!await _dbContext.ListDepartments.AsNoTracking()
+                .AnyAsync(rec => rec.Id == civilLawContract.DepartmentId, cancellationToken))
                 throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі з {civilLawContract.DepartmentId}");
         }
     }

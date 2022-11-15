@@ -18,7 +18,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
         /// <returns>Надбавка за классность</returns>
         public static ListGradeAllowance MapListGradeAllowance(this CreateListGradeAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListGradeAllowance
             {
@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
         /// <returns>Надбавка за классность</returns>
         public static ListGradeAllowance MapListGradeAllowance(this UpdateListGradeAllowanceDto dto)
         {
-            if (dto == null) throw new NullReferenceException(nameof(dto));
+            if (dto == null) throw new ArgumentNullException(nameof(dto));
 
             return new ListGradeAllowance
             {
@@ -59,7 +59,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
         /// <returns>DTO "Надбавки за классность"</returns>
         public static ListGradeAllowanceDto MapListGradeAllowanceDto(this ListGradeAllowance gradeAllowance)
         {
-            if (gradeAllowance == null) throw new NullReferenceException(nameof(gradeAllowance));
+            if (gradeAllowance == null) throw new ArgumentNullException(nameof(gradeAllowance));
 
             return new ListGradeAllowanceDto
             {
@@ -70,7 +70,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
                 Grade = gradeAllowance.Grade,
                 DepartmentId = gradeAllowance.DepartmentId,
                 DepartmentName = gradeAllowance.Department?.Name,
-                UseAllowance = (gradeAllowance.Flags & (int)ListGradeAllowanceFlags.NoUse) <= 0
+                UseAllowance = (gradeAllowance.Flags & (int)ListGradeAllowanceActions.NoUse) <= 0
             };
         }
 
@@ -91,7 +91,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
                 Grade = gradeAllowance.Grade,
                 DepartmentId = gradeAllowance.DepartmentId,
                 DepartmentName = gradeAllowance.Department.Name,
-                UseAllowance = (gradeAllowance.Flags & (int)ListGradeAllowanceFlags.NoUse) <= 0
+                UseAllowance = (gradeAllowance.Flags & (int)ListGradeAllowanceActions.NoUse) <= 0
             });
         }
 
@@ -104,7 +104,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Extensions
         {
             var flags = 0;
             if (!useAllowance)
-                flags += (int)ListGradeAllowanceFlags.NoUse;
+                flags += (int)ListGradeAllowanceActions.NoUse;
 
             return flags;
         }
