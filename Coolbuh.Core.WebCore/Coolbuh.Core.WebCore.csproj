@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\Coolbuh3.0\Coolbuh.Core\Coolbuh.Core.WebCore\Coolbuh.Core.WebCore.xml</DocumentationFile>
+    <DocumentationFile>Coolbuh.Core.WebCore\Coolbuh.Core.WebCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
