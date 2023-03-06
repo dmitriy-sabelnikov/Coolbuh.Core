@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /.sonarqube/conf
 /Coolbuh.Blazor.Client
+/Coolbuh.Core.WebCore/appsettings.json
