@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Security.Authentication;
 
 namespace Coolbuh.Core.WebCore
 {
@@ -24,7 +25,7 @@ namespace Coolbuh.Core.WebCore
             Host.CreateDefaultBuilder(args)
                 .ConfigureLogging((_, builder) =>
                 {
-
+                    
                     builder.AddFile(option =>
                     {
                         option.FileName = "CoolbuhLog_";
@@ -32,6 +33,10 @@ namespace Coolbuh.Core.WebCore
                         option.LogDirectory = Environment.CurrentDirectory + "/Logs";
                     });
                 })
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder => 
+                {
+
+                    webBuilder.UseStartup<Startup>(); 
+                });
     }
 }
