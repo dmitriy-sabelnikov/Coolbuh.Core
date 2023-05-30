@@ -76,9 +76,6 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.UpdateListDepa
 
             if (departments.Any(rec => rec.Id != department.Id))
                 throw new UseCaseException($"Дублікат коду {department.Code} в довіднику");
-
-            var dep = departments.Find(u => u.Id == department.Id);
-            _dbContext.ListDepartments.Attach(dep);
         }
     }
 }
