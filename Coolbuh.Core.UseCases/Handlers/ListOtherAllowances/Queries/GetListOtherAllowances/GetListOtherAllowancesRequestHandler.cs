@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Queries.GetListOthe
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var otherAllowances = _dbContext.ListOtherAllowances.AsNoTracking().SelectListOtherAllowanceDtos();
+            var otherAllowances = _dbContext.ListOtherAllowances.SelectListOtherAllowanceDtos();
 
             return await otherAllowances.ToListAsync(cancellationToken);
         }

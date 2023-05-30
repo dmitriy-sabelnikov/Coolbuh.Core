@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Queries.GetListMini
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var minimumSalaries = _dbContext.ListMinimumSalaries.AsNoTracking().SelectListMinimumSalaryDtos();
+            var minimumSalaries = _dbContext.ListMinimumSalaries.SelectListMinimumSalaryDtos();
 
             return await minimumSalaries.ToListAsync(cancellationToken);
         }

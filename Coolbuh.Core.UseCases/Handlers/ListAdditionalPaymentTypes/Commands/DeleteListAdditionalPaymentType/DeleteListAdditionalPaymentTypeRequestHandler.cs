@@ -59,13 +59,11 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Commands.Del
         private async Task<ListAdditionalPaymentType> GetListAdditionalPaymentTypeAsync(int id,
             CancellationToken cancellationToken)
         {
-            var additionalPaymentType = await _dbContext.ListAdditionalPaymentTypes.AsNoTracking()
+            var additionalPaymentType = await _dbContext.ListAdditionalPaymentTypes
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
-            if (additionalPaymentType == null)
-                throw new NotFoundEntityUseCaseException($"Відсутній тип додаткових виплат в базі (id: {id})");
-
-            return additionalPaymentType;
+            return additionalPaymentType 
+                ?? throw new NotFoundEntityUseCaseException($"Відсутній тип додаткових виплат в базі (id: {id})");
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Commands.DeleteEmployeeCa
         /// <returns>Карточка работника</returns>
         private async Task<EmployeeCard> GetEmployeeCardAsync(int id, CancellationToken cancellationToken)
         {
-            var employeeCard = await _dbContext.EmployeeCards.AsNoTracking()
+            var employeeCard = await _dbContext.EmployeeCards
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (employeeCard == null)

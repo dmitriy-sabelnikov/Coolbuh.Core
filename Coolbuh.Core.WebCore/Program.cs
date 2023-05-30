@@ -13,6 +13,7 @@ namespace Coolbuh.Core.WebCore
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            
             using (var scope = host.Services.CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<IDbContext>()?.UpdateDb();

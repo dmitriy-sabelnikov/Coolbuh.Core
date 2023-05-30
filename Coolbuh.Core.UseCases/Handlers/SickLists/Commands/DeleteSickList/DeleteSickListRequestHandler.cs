@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Commands.DeleteSickList
         /// <returns>Больничный лист</returns>
         private async Task<SickList> GetSickListAsync(int id, CancellationToken cancellationToken)
         {
-            var sickList = await _dbContext.SickLists.AsNoTracking()
+            var sickList = await _dbContext.SickLists
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (sickList == null)

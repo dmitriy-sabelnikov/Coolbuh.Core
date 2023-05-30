@@ -13,7 +13,6 @@ namespace Coolbuh.Core.DomainServices.Implementation
         {
             if (minimumSalary == null) throw new ArgumentNullException(nameof(minimumSalary));
 
-
             if (minimumSalary.PeriodEnd != null && minimumSalary.PeriodBegin != null &&
                 minimumSalary.PeriodEnd < minimumSalary.PeriodBegin)
                 throw new NotValidEntityEntityException("Дата початку більше за дату закінчення");

@@ -36,7 +36,7 @@ namespace Coolbuh.Core.UseCases.Handlers.EmployeeCards.Queries.GetEmployeeCardBy
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var employeeCard = _dbContext.EmployeeCards.AsNoTracking().SelectEmployeeCardDtos(request.Id);
+            var employeeCard = _dbContext.EmployeeCards.SelectEmployeeCardDtos(request.Id);
 
             return await employeeCard.FirstOrDefaultAsync(cancellationToken);
         }

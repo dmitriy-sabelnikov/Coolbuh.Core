@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Queries.GetPaymentsByParams
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var payments = _dbContext.Payments.AsNoTracking()
+            var payments = _dbContext.Payments
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod
                     && rec.AccountingPeriod <= request.EndPeriod)
                 .SelectPaymentDtos();

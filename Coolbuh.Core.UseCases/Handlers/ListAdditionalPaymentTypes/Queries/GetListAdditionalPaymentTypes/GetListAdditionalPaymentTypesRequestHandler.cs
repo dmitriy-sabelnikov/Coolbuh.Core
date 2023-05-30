@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalPaymentTypes.Queries.GetL
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var additionalPaymentTypes = _dbContext.ListAdditionalPaymentTypes.AsNoTracking()
+            var additionalPaymentTypes = _dbContext.ListAdditionalPaymentTypes
                 .SelectListAdditionalPaymentTypeDtos();
 
             return await additionalPaymentTypes.ToListAsync(cancellationToken);

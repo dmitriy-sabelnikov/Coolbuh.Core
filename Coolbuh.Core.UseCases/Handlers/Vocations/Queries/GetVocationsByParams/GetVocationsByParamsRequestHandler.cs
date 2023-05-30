@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Queries.GetVocationsByParams
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var vocations = _dbContext.Vocations.AsNoTracking()
+            var vocations = _dbContext.Vocations
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.DepartmentId != null &&
                                                                               rec.DepartmentId ==

@@ -56,7 +56,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListOtherAllowances.Commands.DeleteList
         /// <returns>Другая надбавка</returns>
         private async Task<ListOtherAllowance> GetListOtherAllowanceAsync(int id, CancellationToken cancellationToken)
         {
-            var otherAllowance = await _dbContext.ListOtherAllowances.AsNoTracking()
+            var otherAllowance = await _dbContext.ListOtherAllowances
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (otherAllowance == null)

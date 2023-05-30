@@ -1,5 +1,6 @@
 ﻿using Coolbuh.Core.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -39,6 +40,7 @@ namespace Coolbuh.Core.Infrastructure.Interfaces.DataAccess
         DbSet<SickList> SickLists { get; set; }
         DbSet<Vocation> Vocations { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        ChangeTracker Tracker { get; }
         void UpdateDb();
     }
 }

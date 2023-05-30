@@ -56,7 +56,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Commands.DeleteListS
         /// <returns>Спецстаж</returns>
         private async Task<ListSocialBenefit> GetListSpecialSeniorityAsync(int id, CancellationToken cancellationToken)
         {
-            var socialBenefit = await _dbContext.ListSocialBenefits.AsNoTracking()
+            var socialBenefit = await _dbContext.ListSocialBenefits
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (socialBenefit == null)

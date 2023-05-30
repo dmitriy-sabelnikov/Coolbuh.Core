@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Queries.GetAdditiona
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var additionalAccruals = _dbContext.AdditionalAccruals.AsNoTracking()
+            var additionalAccruals = _dbContext.AdditionalAccruals
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.DepartmentId != null &&
                                                                               rec.DepartmentId == request.DepartmentId ||

@@ -61,7 +61,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Commands.Del
         private async Task<ListAdditionalAccrualType> GetListAdditionalAccrualTypeAsync(int id,
             CancellationToken cancellationToken)
         {
-            var additionalAccrualType = await _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
+            var additionalAccrualType = await _dbContext.ListAdditionalAccrualTypes
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (additionalAccrualType == null)

@@ -55,13 +55,10 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Commands.DeleteListDepa
         /// <returns>Подразделение</returns>
         private async Task<ListDepartment> GetListDepartmentAsync(int id, CancellationToken cancellationToken)
         {
-            var department = await _dbContext.ListDepartments.AsNoTracking()
+            var department = await _dbContext.ListDepartments
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
-            if (department == null)
-                throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі (id: {id})");
-
-            return department;
+            return department ?? throw new NotFoundEntityUseCaseException($"Відсутній підрозділ в базі (id: {id})");
         }
     }
 }

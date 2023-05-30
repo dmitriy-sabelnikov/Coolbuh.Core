@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSocialBenefits.Queries.GetListSocia
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var socialBenefits = _dbContext.ListSocialBenefits.AsNoTracking().SelectListSocialBenefitDtos();
+            var socialBenefits = _dbContext.ListSocialBenefits.SelectListSocialBenefitDtos();
 
             return await socialBenefits.ToListAsync(cancellationToken);
         }

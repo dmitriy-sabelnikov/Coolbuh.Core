@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPositions.Queries.GetListPositions
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var positions = _dbContext.ListPositions.AsNoTracking().SelectListPositionDtos();
+            var positions = _dbContext.ListPositions.SelectListPositionDtos();
 
             return await positions.ToListAsync(cancellationToken);
         }

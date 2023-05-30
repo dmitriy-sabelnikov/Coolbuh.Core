@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Commands.DeleteSalary
         /// <returns>Зарплата</returns>
         private async Task<Salary> GetSalaryAsync(int id, CancellationToken cancellationToken)
         {
-            var salary = await _dbContext.Salaries.AsNoTracking()
+            var salary = await _dbContext.Salaries
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (salary == null)

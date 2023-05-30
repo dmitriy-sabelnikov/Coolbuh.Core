@@ -57,7 +57,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Commands.DeleteList
         /// <returns>Администрация</returns>
         private async Task<ListAdministration> GetListAdministrationAsync(int id, CancellationToken cancellationToken)
         {
-            var administration = await _dbContext.ListAdministrations.AsNoTracking()
+            var administration = await _dbContext.ListAdministrations
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (administration == null)

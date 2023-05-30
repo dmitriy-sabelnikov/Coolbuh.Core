@@ -55,7 +55,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Commands.DeleteListLivi
         /// <returns>Прожиточный минимум</returns>
         private async Task<ListLivingWage> GetListLivingWageAsync(int id, CancellationToken cancellationToken)
         {
-            var livingWage = await _dbContext.ListLivingWages.AsNoTracking()
+            var livingWage = await _dbContext.ListLivingWages
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (livingWage == null)

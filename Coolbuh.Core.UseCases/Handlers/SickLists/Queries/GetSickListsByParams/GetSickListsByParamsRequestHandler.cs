@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.SickLists.Queries.GetSickListsByParams
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var sickLists = _dbContext.SickLists.AsNoTracking()
+            var sickLists = _dbContext.SickLists
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.DepartmentId != null &&
                                                                               rec.DepartmentId ==

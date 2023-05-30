@@ -45,9 +45,10 @@ namespace Coolbuh.Core.UseCases.Handlers.AccountingPeriods.Queries.GetAccounting
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var year = (await _dbContext.ApplicationSettings.AsNoTracking()
-                .FirstOrDefaultAsync(rec => rec.Type == ApplicationSettingType.AccountingYear, cancellationToken: cancellationToken))
-                ?.DigitValue ?? 0;
+            var setting = await _dbContext.ApplicationSettings.AsNoTracking()
+                .FirstOrDefaultAsync(rec => rec.Type == ApplicationSettingType.AccountingYear, cancellationToken);
+
+            var year = setting?.DigitValue ?? 0;
 
             var periodStart = new DateTime(DateTime.Today.Year - year, 1, 1);
             var periodEnd = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);

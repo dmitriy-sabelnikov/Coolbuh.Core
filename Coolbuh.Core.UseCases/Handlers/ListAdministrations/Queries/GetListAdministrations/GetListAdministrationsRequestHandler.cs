@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdministrations.Queries.GetListAdmi
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var administrations = _dbContext.ListAdministrations.AsNoTracking().SelectListAdministrationsDtos();
+            var administrations = _dbContext.ListAdministrations.SelectListAdministrationsDtos();
 
             return await administrations.ToListAsync(cancellationToken);
         }

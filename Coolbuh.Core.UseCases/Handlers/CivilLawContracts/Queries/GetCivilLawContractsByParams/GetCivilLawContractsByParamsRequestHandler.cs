@@ -40,7 +40,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Queries.GetCivilLawCo
             if (request == null) throw new ArgumentNullException(nameof(request));
 
 
-            var civilLawContracts = _dbContext.CivilLawContracts.AsNoTracking()
+            var civilLawContracts = _dbContext.CivilLawContracts
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.DepartmentId != null &&
                                                                               rec.DepartmentId == request.DepartmentId ||

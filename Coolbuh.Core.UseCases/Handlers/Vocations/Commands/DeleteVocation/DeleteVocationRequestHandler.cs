@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Vocations.Commands.DeleteVocation
         /// <returns>Отпуск</returns>
         private async Task<Vocation> GetVocationAsync(int id, CancellationToken cancellationToken)
         {
-            var vocation = await _dbContext.Vocations.AsNoTracking()
+            var vocation = await _dbContext.Vocations
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (vocation == null)

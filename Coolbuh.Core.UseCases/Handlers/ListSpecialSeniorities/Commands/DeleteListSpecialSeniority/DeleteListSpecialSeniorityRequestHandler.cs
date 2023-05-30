@@ -59,7 +59,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Commands.DeleteL
         private async Task<ListSpecialSeniority> GetListSpecialSeniorityAsync(int id,
             CancellationToken cancellationToken)
         {
-            var specialSeniority = await _dbContext.ListSpecialSeniorities.AsNoTracking()
+            var specialSeniority = await _dbContext.ListSpecialSeniorities
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (specialSeniority == null)

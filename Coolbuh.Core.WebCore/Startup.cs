@@ -41,7 +41,7 @@ namespace Coolbuh.Core.WebCore
 
             #region AppConfigure
 
-            //services.AddMediatR(typeof(GetListDepartmentsRequest));
+            //services.AddCors();
             services.AddMediatR((configuration) => 
             {
                 configuration.RegisterServicesFromAssembly(typeof(GetListDepartmentsRequest).Assembly);
@@ -83,7 +83,7 @@ namespace Coolbuh.Core.WebCore
 
             app.UseRouting();
 
-            app.UseCors("AllowAll");
+            //app.UseCors(c => c.AllowAnyOrigin());
 
             app.UseAuthorization();
 

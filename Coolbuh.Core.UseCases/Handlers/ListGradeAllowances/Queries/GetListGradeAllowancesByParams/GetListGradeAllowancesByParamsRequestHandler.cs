@@ -39,8 +39,8 @@ public class GetListGradeAllowancesByParamsRequestHandler
     {
         if (request == null) throw new ArgumentNullException(nameof(request));
 
-        var gradeAllowances = _dbContext.ListGradeAllowances.Where(rec =>
-                rec.DepartmentId == request.DepartmentId && rec.Grade == request.Grade)
+        var gradeAllowances = _dbContext.ListGradeAllowances
+            .Where(rec => rec.DepartmentId == request.DepartmentId && rec.Grade == request.Grade)
             .SelectListGradeAllowanceDtos();
 
         return await gradeAllowances.ToListAsync(cancellationToken);

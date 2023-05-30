@@ -54,7 +54,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Payments.Commands.DeletePayment
         /// <returns>Выплата</returns>
         private async Task<Payment> GetPaymentAsync(int id, CancellationToken cancellationToken)
         {
-            var payment = await _dbContext.Payments.AsNoTracking()
+            var payment = await _dbContext.Payments
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (payment == null)

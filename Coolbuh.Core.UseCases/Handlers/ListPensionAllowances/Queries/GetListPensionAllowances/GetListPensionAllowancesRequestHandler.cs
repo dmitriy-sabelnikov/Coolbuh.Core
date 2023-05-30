@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListPensionAllowances.Queries.GetListPe
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var minimumSalaries = _dbContext.ListPensionAllowances.AsNoTracking().SelectListPensionAllowanceDtos();
+            var minimumSalaries = _dbContext.ListPensionAllowances.SelectListPensionAllowanceDtos();
 
             return await minimumSalaries.ToListAsync(cancellationToken);
         }

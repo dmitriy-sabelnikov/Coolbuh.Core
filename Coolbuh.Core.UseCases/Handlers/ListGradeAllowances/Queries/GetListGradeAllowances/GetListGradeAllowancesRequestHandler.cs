@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Queries.GetListGrad
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var gradeAllowances = _dbContext.ListGradeAllowances.AsNoTracking().SelectListGradeAllowanceDtos();
+            var gradeAllowances = _dbContext.ListGradeAllowances.SelectListGradeAllowanceDtos();
 
             return await gradeAllowances.ToListAsync(cancellationToken);
         }

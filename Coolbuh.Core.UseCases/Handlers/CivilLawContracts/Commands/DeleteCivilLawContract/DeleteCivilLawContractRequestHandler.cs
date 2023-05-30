@@ -55,7 +55,7 @@ namespace Coolbuh.Core.UseCases.Handlers.CivilLawContracts.Commands.DeleteCivilL
         /// <returns>Договор ГПХ</returns>
         private async Task<CivilLawContract> GetCivilLawContractAsync(int id, CancellationToken cancellationToken)
         {
-            var civilLawContract = await _dbContext.CivilLawContracts.AsNoTracking()
+            var civilLawContract = await _dbContext.CivilLawContracts
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (civilLawContract == null)

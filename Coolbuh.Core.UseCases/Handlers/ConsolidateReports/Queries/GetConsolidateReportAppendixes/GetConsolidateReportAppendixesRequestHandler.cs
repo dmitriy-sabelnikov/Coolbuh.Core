@@ -38,15 +38,15 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Queries.GetConsolida
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var сonsolidateReportAppendixes1 = await _dbContext.ConsolidateReportAppendixes1.AsNoTracking()
+            var сonsolidateReportAppendixes1 = await _dbContext.ConsolidateReportAppendixes1
                 .Where(rec => rec.ConsolidateReportCatalogId == request.ConsolidateReportCatalogId)
                 .SelectConsolidateReportAppendix1Dtos().ToListAsync(cancellationToken);
 
-            var сonsolidateReportAppendixes4 = await _dbContext.ConsolidateReportAppendixes4.AsNoTracking()
+            var сonsolidateReportAppendixes4 = await _dbContext.ConsolidateReportAppendixes4
                 .Where(rec => rec.ConsolidateReportCatalogId == request.ConsolidateReportCatalogId)
                 .SelectConsolidateReportAppendix4Dtos().ToListAsync(cancellationToken);
 
-            var сonsolidateReportAppendixes6 = await _dbContext.ConsolidateReportAppendixes6.AsNoTracking()
+            var сonsolidateReportAppendixes6 = await _dbContext.ConsolidateReportAppendixes6
                 .Where(rec => rec.ConsolidateReportCatalogId == request.ConsolidateReportCatalogId)
                 .SelectConsolidateReportAppendix6Dtos().ToListAsync(cancellationToken);
 

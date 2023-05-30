@@ -57,7 +57,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListMinimumSalaries.Commands.DeleteList
         /// <returns>Минимальная зарплата</returns>
         private async Task<ListMinimumSalary> GetListMinimumSalaryAsync(int id, CancellationToken cancellationToken)
         {
-            var minimumSalary = await _dbContext.ListMinimumSalaries.AsNoTracking()
+            var minimumSalary = await _dbContext.ListMinimumSalaries
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (minimumSalary == null)

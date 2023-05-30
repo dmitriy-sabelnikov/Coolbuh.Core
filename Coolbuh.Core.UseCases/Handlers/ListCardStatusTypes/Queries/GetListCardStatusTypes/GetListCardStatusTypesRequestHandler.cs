@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListCardStatusTypes.Queries.GetListCard
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var cardStatusTypes = _dbContext.ListCardStatusTypes.AsNoTracking().SelectListCardStatusTypeDtos();
+            var cardStatusTypes = _dbContext.ListCardStatusTypes.SelectListCardStatusTypeDtos();
 
             return await cardStatusTypes.ToListAsync(cancellationToken);
         }

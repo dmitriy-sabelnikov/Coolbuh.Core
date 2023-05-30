@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Queries.GetConsolida
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var consolidateReportCatalogs = _dbContext.ConsolidateReportCatalogs.AsNoTracking()
+            var consolidateReportCatalogs = _dbContext.ConsolidateReportCatalogs
                 .SelectConsolidateReportCatalogDtos();
 
             return await consolidateReportCatalogs.ToListAsync(cancellationToken);

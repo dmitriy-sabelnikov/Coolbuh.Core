@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListDepartments.Queries.GetListDepartme
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var departments = _dbContext.ListDepartments.AsNoTracking().SelectListDepartmentDtos();
+            var departments = _dbContext.ListDepartments.SelectListDepartmentDtos();
 
             return await departments.ToListAsync(cancellationToken);
         }

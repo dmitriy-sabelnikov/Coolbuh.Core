@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.Salaries.Queries.GetSalaries
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var salaries = _dbContext.Salaries.AsNoTracking()
+            var salaries = _dbContext.Salaries
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.DepartmentId != null &&
                                                                               rec.DepartmentId ==

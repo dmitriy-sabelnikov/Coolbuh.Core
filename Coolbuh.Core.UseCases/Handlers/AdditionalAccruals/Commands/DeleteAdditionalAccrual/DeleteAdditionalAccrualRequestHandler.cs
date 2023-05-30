@@ -56,7 +56,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalAccruals.Commands.DeleteAddit
         /// <returns>Дополнительное начисление</returns>
         private async Task<AdditionalAccrual> GetAdditionalAccrual(int id, CancellationToken cancellationToken)
         {
-            var additionalAccrual = await _dbContext.AdditionalAccruals.AsNoTracking()
+            var additionalAccrual = await _dbContext.AdditionalAccruals
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (additionalAccrual == null)

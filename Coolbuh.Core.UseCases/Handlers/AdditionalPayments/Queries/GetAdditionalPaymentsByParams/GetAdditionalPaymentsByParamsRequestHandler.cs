@@ -39,7 +39,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Queries.GetAdditiona
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var additionalPayments = _dbContext.AdditionalPayments.AsNoTracking()
+            var additionalPayments = _dbContext.AdditionalPayments
                 .Where(rec => rec.AccountingPeriod >= request.StartPeriod && rec.AccountingPeriod <= request.EndPeriod
                                                                           && (request.AdditionalPaymentTypeId != null &&
                                                                               rec.AdditionalPaymentTypeId == request.AdditionalPaymentTypeId

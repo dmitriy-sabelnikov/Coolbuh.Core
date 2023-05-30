@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListAdditionalAccrualTypes.Queries.GetL
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var additionalAccrualTypes = _dbContext.ListAdditionalAccrualTypes.AsNoTracking()
+            var additionalAccrualTypes = _dbContext.ListAdditionalAccrualTypes
                 .SelectListAdditionalAccrualTypeDtos();
 
             return await additionalAccrualTypes.ToListAsync(cancellationToken);

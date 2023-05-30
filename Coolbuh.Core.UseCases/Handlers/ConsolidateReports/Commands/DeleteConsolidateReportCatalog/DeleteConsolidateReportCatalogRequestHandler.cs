@@ -59,7 +59,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ConsolidateReports.Commands.DeleteConso
         private async Task<ConsolidateReportCatalog> GetConsolidateReportCatalogAsync(int id,
             CancellationToken cancellationToken)
         {
-            var consolidateReportCatalog = await _dbContext.ConsolidateReportCatalogs.AsNoTracking()
+            var consolidateReportCatalog = await _dbContext.ConsolidateReportCatalogs
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (consolidateReportCatalog == null)

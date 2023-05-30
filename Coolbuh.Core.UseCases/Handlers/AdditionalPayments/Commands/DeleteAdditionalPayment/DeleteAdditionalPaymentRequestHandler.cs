@@ -57,7 +57,7 @@ namespace Coolbuh.Core.UseCases.Handlers.AdditionalPayments.Commands.DeleteAddit
         /// <returns>Дополнительная выплата</returns>
         private async Task<AdditionalPayment> GetAdditionalPaymentAsync(int id, CancellationToken cancellationToken)
         {
-            var additionalPayment = await _dbContext.AdditionalPayments.AsNoTracking()
+            var additionalPayment = await _dbContext.AdditionalPayments
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (additionalPayment == null)

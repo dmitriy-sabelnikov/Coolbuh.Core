@@ -56,7 +56,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListGradeAllowances.Commands.DeleteList
         /// <returns>Надбавка за классность</returns>
         private async Task<ListGradeAllowance> GetListGradeAllowanceAsync(int id, CancellationToken cancellationToken)
         {
-            var gradeAllowance = await _dbContext.ListGradeAllowances.AsNoTracking()
+            var gradeAllowance = await _dbContext.ListGradeAllowances
                 .FirstOrDefaultAsync(rec => rec.Id == id, cancellationToken);
 
             if (gradeAllowance == null)

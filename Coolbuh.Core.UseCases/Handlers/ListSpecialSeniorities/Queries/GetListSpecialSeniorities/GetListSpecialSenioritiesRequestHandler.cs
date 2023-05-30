@@ -38,7 +38,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListSpecialSeniorities.Queries.GetListS
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var specialSeniorities = _dbContext.ListSpecialSeniorities.AsNoTracking().SelectListSpecialSeniorityDtos();
+            var specialSeniorities = _dbContext.ListSpecialSeniorities.SelectListSpecialSeniorityDtos();
 
             return await specialSeniorities.ToListAsync(cancellationToken);
         }

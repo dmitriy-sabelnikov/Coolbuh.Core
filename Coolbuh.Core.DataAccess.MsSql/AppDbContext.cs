@@ -1,6 +1,8 @@
 ﻿using Coolbuh.Core.Entities.Models;
 using Coolbuh.Core.Infrastructure.Interfaces.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq;
 
 namespace Coolbuh.Core.DataAccess.MsSql
 {
@@ -42,8 +44,12 @@ namespace Coolbuh.Core.DataAccess.MsSql
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<SickList> SickLists { get; set; }
         public DbSet<Vocation> Vocations { get; set; }
+        public ChangeTracker Tracker { get { return base.ChangeTracker; } }
         public void UpdateDb()
         {
+            if (!Database.GetPendingMigrations().Any())
+                return;
+
             Database.Migrate();
         }
 

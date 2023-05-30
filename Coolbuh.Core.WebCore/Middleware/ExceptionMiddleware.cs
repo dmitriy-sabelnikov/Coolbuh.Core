@@ -44,10 +44,18 @@ namespace Coolbuh.Core.WebCore.Middleware
             if (exception is NotValidEntityEntityException || exception is DomainException
                 || exception is NotFoundEntityUseCaseException || exception is UseCaseException)
             {
-                statusCode = (int)HttpStatusCode.BadRequest;
+                if(exception is NotFoundEntityUseCaseException)
+                {
+                    statusCode = (int)HttpStatusCode.NotFound;
+                }
+                else
+                {
+                    statusCode = (int)HttpStatusCode.BadRequest;
+                }
+
                 message = exception.Message;
 
-                LogException(statusCode.ToString(), message, context.Request.Path, context.Request.Method);
+                LogWarning(statusCode.ToString(), message, context.Request.Path, context.Request.Method);
             }
             else
             {
@@ -70,13 +78,13 @@ namespace Coolbuh.Core.WebCore.Middleware
                     context.Request.Method, exceptionMessage, exception.StackTrace);
             }
 
-            context.Response.ContentType = "text/json";
+            context.Response.ContentType = "text/plain charset=utf-8";
             context.Response.StatusCode = statusCode;
 
             await context.Response.WriteAsync(message);
         }
 
-        private void LogException(string statusCode, string message, string controller, string method)
+        private void LogWarning(string statusCode, string message, string controller, string method)
         {
             _logger.LogWarning(
                 "StatusCode: {statusCode} \n" +

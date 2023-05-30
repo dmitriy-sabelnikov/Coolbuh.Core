@@ -37,7 +37,7 @@ namespace Coolbuh.Core.UseCases.Handlers.ListLivingWages.Queries.GetListLivingWa
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            var livingWages = _dbContext.ListLivingWages.AsNoTracking().SelectListLivingWageDtos();
+            var livingWages = _dbContext.ListLivingWages.SelectListLivingWageDtos();
 
             return await livingWages.ToListAsync(cancellationToken);
         }
