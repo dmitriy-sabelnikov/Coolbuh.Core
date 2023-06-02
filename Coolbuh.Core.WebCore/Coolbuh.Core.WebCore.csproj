@@ -31,8 +31,6 @@
     <ProjectReference Include="..\Coolbuh.Core.Controllers\Coolbuh.Core.Controllers.csproj" />
     <ProjectReference Include="..\Coolbuh.Core.DataAccess.MsSql\Coolbuh.Core.DataAccess.MsSql.csproj" />
     <ProjectReference Include="..\Coolbuh.Core.DomainServices.Implementation\Coolbuh.Core.DomainServices.Implementation.csproj" />
-    <ProjectReference Include="..\Coolbuh.Core.DomainServices.Interfaces\Coolbuh.Core.DomainServices.Interfaces.csproj" />
-    <ProjectReference Include="..\Coolbuh.Core.Infrastructure.Interfaces\Coolbuh.Core.Infrastructure.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
